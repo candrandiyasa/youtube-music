@@ -326,6 +326,24 @@ body {
   font-size: 5em;
 }
 
+.pagination-button {
+  padding: 15px;
+  border: none;
+  width: 30%;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-around;
+  color: #6e6e6e;
+}
+
+.pagination-button a {
+  text-decoration: none;
+  font-size: 15pt;
+  font-weight: bold;
+  color: #6e6e6e;
+}
+
 /* ------------------------------------------
       PLAY CSS
 ------------------------------------------ */
@@ -486,6 +504,113 @@ body {
   }
 }
 
+/* ------------------------------------------
+      PLAYER NAVBAR
+------------------------------------------ */
+.player-navbar {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  height: 13vh;
+  overflow: hidden;
+  background: rgba(233, 233, 233);
+  z-index: 99999;
+}
+.player-content-left {
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+}
+.player-content-left a {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 100%;
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  color: #3b3b3b;
+  transition-duration: 0.3s;
+}
+
+.player-content-left a:hover {
+  color: #919191;
+}
+.player-content-left a:hover.play-pause {
+  border-color: #919191;
+}
+.player-content-left a.play-pause.active {
+  border-color: #919191;
+}
+.player-content-left a.play-pause.active i::before {
+  content: "";
+  margin-left: 5px;
+}
+.player-content-left a.active {
+  color: #919191;
+}
+
+.player-content-time {
+  padding: 10px;
+  width: 100%;
+}
+
+.player-content-time .time {
+  color: #505050;
+}
+.player-content-time .time-rail {
+  height: 1px;
+  position: relative;
+  padding: 15px 0;
+  overflow: hidden;
+}
+.player-content-time .time-rail .thumb, .player-content-time .time-rail .track {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.player-content-time .time-rail .thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ffba49;
+  z-index: 1;
+  left: 30%;
+  transition: 0.3s;
+}
+.player-content-time .time-rail .thumb:hover {
+  transform: translateY(-50%) scale(1.2);
+}
+.player-content-time .time-rail .thumb::before {
+  content: "";
+  width: 500px;
+  height: 1px;
+  background-color: #ffba49;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+}
+.player-content-time .time-rail .track {
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background-color: #c6ad94;
+}
+.player-content-time .time-rail input[type="range"] {
+  width: 100%;
+  -webkit-appearance: none;
+  overflow: hidden;
+  background: none;
+}
+.player-content-time .time-rail input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ffba49;
+}
 /* ------------------------------------------
       FOOTER CONTENT
 ------------------------------------------ */

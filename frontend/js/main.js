@@ -5,7 +5,16 @@ $(window).on('scroll', function(){
   }else{
     $('nav').removeClass('lineBottom');
   }
-})
+});
+
+(function() {
+  $(".player-content-left").find('a').click(function() {
+    if ($(this).hasClass("random") || $(this).hasClass("play-pause") || $(this).hasClass("repeat")) {
+      return $(this).toggleClass("active");
+    }
+  });
+
+}).call(this);
 
 
 /* sticky position for navbar content
