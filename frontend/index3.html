@@ -31,12 +31,59 @@
       </div>
       <div class="nav-wrapper">
         <ul>
-          <li><a href="#">Create Acount</a></li>
-          <li><a href="#">Log In</a></li>
+          <li><a onclick="document.getElementById('md-account').style.display='block'">Create Acount</a></li>
+          <li><a onclick="document.getElementById('md-account-login').style.display='block'">Log In</a></li>
           <li><a href="#">About Us</a></li>
         </ul>
       </div>
     </nav>
+
+    <div id="md-account" class="modal-create-account">
+      <div class="modal-create-account-content">
+        <div class="modal-container">
+          <span onclick="document.getElementById('md-account').style.display='none'" class="modal-butt-close modal-topright">&times;</span>
+          <br>
+          <h1>Create New Account </h1>
+          <small>Make your playlist music for free</small>
+          <br><br>
+          <div class="modal-container-middle">
+            <form action="#">
+              <input type="text" placeholder="Your Username">
+              <input type="password" placeholder="Your Password" style="float: left;">
+              <input type="password" placeholder="Confirmation Password" style="float: right;">
+              <input type="email" placeholder="Your Email">
+              <input type="submit" value="Sign Up">
+            </form>
+            <br>
+            <div style="text-align: center;">Already have an account? <a onclick="document.getElementById('md-account').style.display='none'; document.getElementById('md-account-login').style.display='block'">Log In</a></div>
+            <br><br>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="md-account-login" class="modal-create-account">
+      <div class="modal-create-account-content">
+        <div class="modal-container">
+          <span onclick="document.getElementById('md-account-login').style.display='none'" class="modal-butt-close modal-topright">&times;</span>
+          <br>
+          <h1>Log In </h1>
+          <small>Make your playlist music for free</small>
+          <br><br>
+          <div class="modal-container-middle">
+            <form action="#">
+              <input type="text" placeholder="Username or Email">
+              <input type="password" placeholder="Your Password" style="float: left; width: 100%;">
+              <input type="submit" value="Log In">
+            </form>
+            <br>
+            <div style="text-align: center;">Don't have an account? <a onclick="document.getElementById('md-account-login').style.display='none'; document.getElementById('md-account').style.display='block'">Create Account</a></div>
+            <br><br>
+          </div>
+        </div>
+      </div>
+    </div>
+
   <!-- this end CONTAINER for Navbar responsive -->
 
 <div class="container-body">
