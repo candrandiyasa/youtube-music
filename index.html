@@ -137,8 +137,8 @@
         <div class="player-content-time">
             <div class="time">
               <div class="row">
-                <div class="col-md-6" id="currentSongTitle">
-                <!-- player's song title deployed here-->
+                <div class="col-md-6" id="song-title">
+                <!-- current song title deployed here-->
                 </div>
                 <div class="col-md-6" align="right">
                 <small class="current" id="current">0:0</small>
@@ -147,9 +147,8 @@
                 </div>
               </div>
             </div>
-            <div class="time-rail">
-              <div class="thumb"></div>
-              <div class="track"></div>
+            <div>
+                <input type="range" min="0" max="100" style="width: 520px;" id="seek" value="0" onclick="return seekSong();">
             </div>
         </div>
       </div>
