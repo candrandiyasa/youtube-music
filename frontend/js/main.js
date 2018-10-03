@@ -16,6 +16,31 @@ $(window).on('scroll', function(){
 
 }).call(this);
 
+//----------start
+$('#playlist-menu').click(function(e){
+    e.stopPropagation();
+     $('#playlist-container').toggleClass('playlist-container-show');
+      document.body.style.overflow = 'hidden';
+});
+
+$('body,html').click(function(e){
+    var container = $("#playlist-container");
+    if (!container.is(e.target) && container.has(e.target).length === 0) {
+      container.removeClass('playlist-container-show');
+      document.body.style.overflow = 'auto';
+    }
+});
+//--------------end
+
+function loginOpen(){
+  // if(){
+    alert('Data Berhasil Di Simpan');
+  // }else{
+
+  //}
+  document.getElementById('md-account').style.display='none';
+  document.getElementById('md-account-login').style.display='block'
+}
 
 /* sticky position for navbar content
 $(function(){
