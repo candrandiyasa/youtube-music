@@ -242,7 +242,8 @@ body {
   position: relative;
   padding: 0;
   outline: 0;
-  width: 500px;
+  width: 90%;
+  max-width: 500px;
   border-radius: 3px;
 }
 
@@ -261,7 +262,7 @@ body {
 }
 
 .modal-container-middle {
-  padding: 20px;
+  padding: 10px;
   width: 100%;
 }
 
@@ -287,6 +288,12 @@ body {
 .modal-container-middle input[type=password] {
     width: 49%;
     position: relative;
+}
+
+@media screen and (max-width: 864px) {
+  .modal-container-middle input[type=password] {
+      width: 100%;
+  }
 }
 
 .modal-container-middle input[type=submit] {
@@ -492,11 +499,12 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding: 20px;
+  padding: 10px 5px 5px 5px;
   float: left;
   margin: 0px;
   font-weight: bold;
   font-size: 18pt;
+  position: relative;
 }
 
 .content-album-play p small {
@@ -505,37 +513,42 @@ body {
   color: #959494;
 }
 
-.content-album-play p a {
-  font-size: 12pt;
-  padding-left: 10px;
+.phone-list  {
+    display: none;
+}
+
+.md-back a {
   text-decoration: none;
-  color: #202020;
+  color: #fff;
+  font-size: 10pt;
+  padding: 5px 20px;
+  float: right;
+  margin-right: 5px;
+  background-color: rgb(66, 66, 66);
 }
 
 @media screen and (max-width: 864px) {
   .md-back {
-    float: right;
-    position: absolute;
-    display: flex;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    height: 100%;
-    width: 30%;
-    padding: 10px;
-    margin: 0 auto;/*
-    opacity: 0;
-    filter: alpha(opacity=0); For IE8 and earlier */
-    transition: .5s ease;
-    -webkit-transition: .5s ease;
-    -moz-transition: .5s ease;
-    -o-transition: .5s ease;
-    background-color: rgba(251, 251, 251, 0.9);
+    display: none;
   }
-  .content-album-play p a {
-    position: relative;
-    font-size: 3em;
-    float: right;
+  .phone-list {
+    text-align: right;
+    font-size: 10pt;
+    display: block;
+  }
+  .phone-list label {
+    background-color: #959595;
+    padding: 3px 10px;
+    font-weight: 900;
+    color: #fff;
+  }
+  .content-album-play p {
+    font-size: 14pt;
+    padding: 15px 0px 10px 0px;
+  }
+  .content-album-play img {
+    -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(0%);
   }
 }
 
@@ -621,7 +634,7 @@ body {
   height: 13vh;
   overflow: hidden;
   background: rgba(233, 233, 233);
-  z-index: 99999;
+  z-index: 9980;
 }
 .player-content-left {
   text-align: center;
@@ -637,6 +650,32 @@ body {
   line-height: 44px;
   color: #3b3b3b;
   transition-duration: 0.3s;
+}
+
+@media screen and (max-width: 1223px) {
+  .player-content-left {
+    padding: 0px;
+  }
+  .player-content-left a {
+    width: 24px;
+    margin: 0px 10px;
+    height: 24px;
+    line-height: 24px;
+  }
+  .player-navbar {
+    height: 170px;
+    padding-top: 20px;
+    z-index: 1;
+  }
+  .time .row .col-md-9 {
+    max-width: 70%;
+  }
+  .time .row .col-md-3 {
+    max-width: 30%;
+  }
+  .player-content-time .time-rail {
+    padding: 5px 0;
+  }
 }
 
 .player-content-left a:hover {
@@ -784,7 +823,6 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 .playlist-container a {
   position: relative;
   float: left;
