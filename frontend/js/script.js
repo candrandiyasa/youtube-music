@@ -1,25 +1,35 @@
+//prevent the form from submitting
 $(function(){
     $('#search-form').submit(function(e){
         e.preventDefault();
-    }); 
+    });
 })
 
+//youtube API Key
 var apiKey = 'AIzaSyBM7U5jft6XHLqfNfo1ZN3ZKg744gx_76w';
+
+//required vars and arrays
 var index=1, i=0;
-var list = [], listTitle = [], listDur = [];
+var list = [], listTitle = [], listDur = [], seek = [];
+
+//calling iframe API asynchronously
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
+function clearArrays(){
+    list = [];
+    listTitle = [];
+    listDur = [];
+    seek = [];
+}
+//search engine
 function search(){
     //clr results
     $('#results').html('');
     $('#buttons').html('');
     //clear index array
-    list = [];
-    listTitle = [];
-    listDur = [];
+    clearArrays();
     //get input val
     query = $('#query').val();
     //GET request on Youtube API V3
@@ -28,7 +38,7 @@ function search(){
             part: 'snippet, id',
             q: query,
             type: 'video',
-            maxResults: '40',
+            maxResults: '10',
             key: apiKey},
 
             function(data){
@@ -43,26 +53,26 @@ function search(){
                         key: apiKey},
                         function(data){
                             console.log(data);
-                            
+
                             $.each(data.items, function(j, details){
                                 var listIds = item.id.videoId;
                                 var listTitles = item.snippet.title;
                                 var time = details.contentDetails.duration;
                                 var timeConv = moment.duration(time);
-                                var dur = timeConv.format('mm:ss', {trim: false});
+                                var dur = timeConv.format('m:s', {trim: false});
+                                var seekTime = timeConv.format('s', {trim: false});
                                 list.push(listIds);
                                 listTitle.push(listTitles);
                                 listDur.push(dur);
-                                console.log(list);
-                                console.log(listTitles);
-                                console.log(listDur);
+                                seek.push(seekTime)
+                                //console.log(seekTime);
                                  //custom function to get request output
                                 var output = getOutput(item, details);
                                 $('#results').append(output);
                             });
                         }
                     );
-                   
+
                 });
                 //page buttons
                 var buttons = pageBtn(prevPageToken, nextPageToken);
@@ -83,9 +93,11 @@ function nextPage(){
     $('#results').html('');
     $('#buttons').html('');
     //clear index array
-    list = [];
+    clearArrays();
     //get input val
     query = $('#query').val();
+    index = index + 1;
+    console.log(index);
     //GET request on Youtube API V3
     $.get(
         "https://www.googleapis.com/youtube/v3/search",{
@@ -93,15 +105,13 @@ function nextPage(){
             pageToken: token,
             q: query,
             type: 'video',
-            maxResults: '40',
+            maxResults: '10',
             key: apiKey},
 
             function(data){
                 var nextPageToken = data.nextPageToken;
                 var prevPageToken = data.prevPageToken;
-                index = index + 1;
                 console.log(data);
-                console.log(index);
                 $.each(data.items, function(i, item){
                     $.get("https://www.googleapis.com/youtube/v3/videos",{
                         id: item.id.videoId,
@@ -109,19 +119,19 @@ function nextPage(){
                         key: apiKey},
                         function(data){
                             console.log(data);
-                            
+
                             $.each(data.items, function(j, details){
                                 var listIds = item.id.videoId;
                                 var listTitles = item.snippet.title;
                                 var time = details.contentDetails.duration;
                                 var timeConv = moment.duration(time);
-                                var dur = timeConv.format('mm:ss', {trim: false});
+                                var dur = timeConv.format('m:s', {trim: false});
+                                var seekTime = timeConv.format('s', {trim: false});
+                                seek.push(seekTime)
                                 list.push(listIds);
                                 listTitle.push(listTitles);
                                 listDur.push(dur);
-                                console.log(list);
-                                console.log(listTitles);
-                                console.log(listDur);
+                                console.log(timeConv);
                                  //custom function to get request output
                                 var output = getOutput(item, details);
                                 $('#results').append(output);
@@ -132,23 +142,23 @@ function nextPage(){
                 //page buttons
                 var buttons = pageBtn(prevPageToken, nextPageToken, index);
                 $('#buttons').append(buttons);
-
-            }
-    );
+        });
+    return index;
 }
 
 // Previous page function
 function prevPage() {
     var token = $('#prev-button').data('token');
     var q = $('#prev-button').data('query');
-   // clear 
+   // clear
     $('#results').html('');
     $('#buttons').html('');
     //clear index array
-    list = [];
+    clearArrays();
+    index = index - 1;
+    console.log(index);
     // get form input
-    q = $('#query').val();  
-    
+    q = $('#query').val();
     // run get request on API
     $.get(
         "https://www.googleapis.com/youtube/v3/search", {
@@ -160,13 +170,11 @@ function prevPage() {
             key: apiKey},
 
             function(data) {
-            
+
             var nextPageToken = data.nextPageToken;
             var prevPageToken = data.prevPageToken;
-            index = index - 1;
             // Log data
             console.log(data);
-            console.log(index);
             $.each(data.items, function(i, item) {
               $.get("https://www.googleapis.com/youtube/v3/videos",{
                         id: item.id.videoId,
@@ -174,13 +182,15 @@ function prevPage() {
                         key: apiKey},
                         function(data){
                             console.log(data);
-                            
+
                             $.each(data.items, function(j, details){
                                 var listIds = item.id.videoId;
                                 var listTitles = item.snippet.title;
                                 var time = details.contentDetails.duration;
                                 var timeConv = moment.duration(time);
-                                var dur = timeConv.format('mm:ss', {trim: false});
+                                var dur = timeConv.format('m:s', {trim: false});
+                                var seekTime = timeConv.format('s', {trim: false});
+                                seek.push(seekTime)
                                 list.push(listIds);
                                 listTitle.push(listTitles);
                                 listDur.push(dur);
@@ -194,12 +204,11 @@ function prevPage() {
                         }
                     );
             });
-            
             var buttons = pageBtn(prevPageToken, nextPageToken);
-            
             // Display buttons
             $('#buttons').append(buttons);
-        });    
+        });
+    return index;
 }
 
 //display results
@@ -213,14 +222,14 @@ function getOutput(item,details){
     var duration = time.format('m:s', {trim:false});
     var output ='<div class="col-md-10">'+
                 '<div class="content-album-play">'+
-                '<img src="'+img+'">'+
+                '<img src="'+img+'" class="content-album-play-img">'+
                 '<div class="row">'+
                 '<div class="col-md-12">'+
                 '<p>'+title+'<br>'+
                 '<small>'+duration+' uploaded by '+channel+'</small>'+
                 '<b class="md-back">'+
-                '<a href="#" title="Play this video music" data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playVideo(this);return false;"><i class="fa">&#xf01d;</i></a>'+
-                '<a href="#" title="Set this music to my playlist"><i class="fa">&#xf196;</i></a>'+
+                '<a href="#" title="Play this video music" data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playVideo(this);return false;"><i class="fa">&#xf01d;</i> Play</a>'+
+                '<a href="#" title="Set this music to my playlist"><i class="fa">&#xf196;</i> Set to Playlist</a>'+
                 '</b></p></div></div></div></div>';
     return output;
 }
@@ -256,19 +265,24 @@ function onPlayerReady(event) {
 var timer;
 function onPlayerStateChange(event) {
     if (event.data == 0) {
-        nextSong();
         return false;
         $('#current').html('');
+        $('#seek').val(0);
+         nextSong();
     }
     if(event.data==1) { // playing
-        timer = setInterval(function(){ 
-            var time;
-            time = player.getCurrentTime();
-            var current = parseInt(time / 60) + ':' + Math.floor(time % 60);
+        timer = setInterval(function(){
+            var time = player.getCurrentTime();
+            var currentSec = Math.floor(time);
+            var current = parseInt(time / 60) + ':' + (currentSec % 60);
+            //console.log(seek[i]);
             //console.log(current);
             var currentTag = document.getElementById("current");
             currentTag.innerHTML = current;
+            $('#seek').val(currentSec * (100 / seek[i]));
+
         }, 1000); // 100 means repeat in 100 ms
+
     } else { // not playing
         clearInterval(timer);
     }
@@ -279,55 +293,69 @@ function stop() {
 }
 
 function playVideo(element) {
-        $('#currentSongTitle').html('');
-        $('#duration').html('');
+        $('#song-title').html('');
         var songId = $(element).data('id');
         var songTitle = $(element).data('title');
         var duration = $(element).data('dur');
-        console.log(songId);
-        console.log(songTitle);
+        //console.log(songId);
+        //console.log(songTitle);
         player.loadVideoById(songId, "small");
         i = list.indexOf(songId);
-        console.log(i);
+        //console.log(i);
         var titleText = '<small class="current">'+songTitle+'</small>';
-        $('#currentSongTitle').append(titleText);
-        $('#duration').append(duration); 
+        $('#song-title').append(titleText);
+        var durationTag = document.getElementById("duration");
+        durationTag.innerHTML = duration;
+
         document.title = 'Project PPL - '+songTitle;
 
 }
 function nextSong(){
-    if(i<40){
-       i = i+1; 
+    if(i<10){
+       i = i+1;
     } else {
-        i = 39;
+        i = 9;
     }
-    $('#currentSongTitle').html('');
+    $('#song-title').html('');
     var songId = list[i];
     var songTitle = listTitle[i];
-    console.log(songId);
-    console.log(songTitle);
-    console.log(i);
+    var duration = listDur[i];
+    //console.log(songId);
+    //console.log(songTitle);
+    //console.log(i);
     player.loadVideoById(songId, "small");
     var titleText = '<small class="current">'+songTitle+'</small>';
-    $('#currentSongTitle').append(titleText);
+    var durationTag = document.getElementById("duration");
+    durationTag.innerHTML = duration;
+    var titleText = '<small class="current">'+songTitle+'</small>';
+    $('#song-title').append(titleText);
     document.title = 'Project PPL - '+songTitle;
 }
 function prevSong(){
     if(i>0){
-       i = i-1; 
+       i = i-1;
     } else {
         i = 0;
     }
-    $('#currentSongTitle').html('');
+    $('#song-title').html('');
     var songId = list[i];
     var songTitle = listTitle[i];
-    console.log(songId);
-    console.log(i);
+    var duration = listDur[i];
+    //console.log(songId);
+    //console.log(i);
     player.loadVideoById(songId, "small");
     var titleText = '<small class="current">'+songTitle+'</small>';
-    $('#currentSongTitle').append(titleText);
+    $('#song-title').append(titleText);
+    var durationTag = document.getElementById("duration");
+    durationTag.innerHTML = duration;
     document.title = 'Project PPL - '+songTitle;
 }
 function pause(){
     player.pauseVideo();
+}
+
+function seekSong(){
+    var seekVal = $('#seek').val() * (1000/seek[i]);
+    player.seekTo(seekVal);
+    //console.log(seekVal);
 }

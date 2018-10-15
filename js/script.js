@@ -2,7 +2,7 @@
 $(function(){
     $('#search-form').submit(function(e){
         e.preventDefault();
-    }); 
+    });
 })
 
 //youtube API Key
@@ -53,7 +53,7 @@ function search(){
                         key: apiKey},
                         function(data){
                             console.log(data);
-                            
+
                             $.each(data.items, function(j, details){
                                 var listIds = item.id.videoId;
                                 var listTitles = item.snippet.title;
@@ -72,7 +72,7 @@ function search(){
                             });
                         }
                     );
-                   
+
                 });
                 //page buttons
                 var buttons = pageBtn(prevPageToken, nextPageToken);
@@ -119,7 +119,7 @@ function nextPage(){
                         key: apiKey},
                         function(data){
                             console.log(data);
-                            
+
                             $.each(data.items, function(j, details){
                                 var listIds = item.id.videoId;
                                 var listTitles = item.snippet.title;
@@ -138,7 +138,7 @@ function nextPage(){
                             });
                         }
                     );
-                }); 
+                });
                 //page buttons
                 var buttons = pageBtn(prevPageToken, nextPageToken, index);
                 $('#buttons').append(buttons);
@@ -150,7 +150,7 @@ function nextPage(){
 function prevPage() {
     var token = $('#prev-button').data('token');
     var q = $('#prev-button').data('query');
-   // clear 
+   // clear
     $('#results').html('');
     $('#buttons').html('');
     //clear index array
@@ -158,7 +158,7 @@ function prevPage() {
     index = index - 1;
     console.log(index);
     // get form input
-    q = $('#query').val();  
+    q = $('#query').val();
     // run get request on API
     $.get(
         "https://www.googleapis.com/youtube/v3/search", {
@@ -170,7 +170,7 @@ function prevPage() {
             key: apiKey},
 
             function(data) {
-            
+
             var nextPageToken = data.nextPageToken;
             var prevPageToken = data.prevPageToken;
             // Log data
@@ -182,7 +182,7 @@ function prevPage() {
                         key: apiKey},
                         function(data){
                             console.log(data);
-                            
+
                             $.each(data.items, function(j, details){
                                 var listIds = item.id.videoId;
                                 var listTitles = item.snippet.title;
@@ -207,8 +207,8 @@ function prevPage() {
             var buttons = pageBtn(prevPageToken, nextPageToken);
             // Display buttons
             $('#buttons').append(buttons);
-        });  
-    return index;  
+        });
+    return index;
 }
 
 //display results
@@ -221,16 +221,32 @@ function getOutput(item,details){
     var time = moment.duration(isoTime);
     var duration = time.format('m:s', {trim:false});
     var output ='<div class="col-md-10">'+
-                '<div class="content-album-play">'+
-                '<img src="'+img+'">'+
-                '<div class="row">'+
-                '<div class="col-md-12">'+
-                '<p>'+title+'<br>'+
-                '<small>'+duration+' uploaded by '+channel+'</small>'+
-                '<b class="md-back">'+
-                '<a href="#" title="Play this video music" data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playVideo(this);return false;"><i class="fa">&#xf01d;</i></a>'+
-                '<a href="#" title="Set this music to my playlist"><i class="fa">&#xf196;</i></a>'+
-                '</b></p></div></div></div></div>';
+                  '<div class="content-album-play">'+
+                    '<img src="'+img+'">'+
+                    '<div class="row">'+
+                      '<div class="col-md-12">'+
+                        '<div class="row">'+
+                          '<div class="col-md-12">'+
+                            '<p data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playVideo(this);return false;">'+title+'<br>'+
+                              '<small>'+duration+' uploaded by '+channel+'</small>'+
+                            '</p>'+
+                            '<b class="md-back">'+
+                              '<a href="#" title="Play this video music" data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playVideo(this);return false;"><i class="fa">&#xf01d;</i> Play</a>'+
+                              '<a href="#" title="Set this music to my playlist"><i class="fa">&#xf196;</i> Set to MyPlaylist</a>'+
+                            '</b>'+
+                          '</div>'+
+                        '</div>'+
+                        '<div class="phone-list">'+
+                          '<div class="row" data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playVideo(this);return false;">'+
+                            '<div class="col-md-12">'+
+                              '<label title="Set this music to my playlist">Set to MyPlaylist</label>'+
+                            '</div>'+
+                          '</div>'+
+                        '</div>'+
+                      '</div>'+
+                    '</div>'+
+                  '</div>'+
+                '</div>';
     return output;
 }
 
@@ -271,7 +287,7 @@ function onPlayerStateChange(event) {
          nextSong();
     }
     if(event.data==1) { // playing
-        timer = setInterval(function(){ 
+        timer = setInterval(function(){
             var time = player.getCurrentTime();
             var currentSec = Math.floor(time);
             var current = parseInt(time / 60) + ':' + (currentSec % 60);
@@ -306,13 +322,13 @@ function playVideo(element) {
         $('#song-title').append(titleText);
         var durationTag = document.getElementById("duration");
         durationTag.innerHTML = duration;
-        
+
         document.title = 'Project PPL - '+songTitle;
 
 }
 function nextSong(){
     if(i<10){
-       i = i+1; 
+       i = i+1;
     } else {
         i = 9;
     }
@@ -333,7 +349,7 @@ function nextSong(){
 }
 function prevSong(){
     if(i>0){
-       i = i-1; 
+       i = i-1;
     } else {
         i = 0;
     }

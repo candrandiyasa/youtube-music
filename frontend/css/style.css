@@ -489,6 +489,18 @@ body {
   filter: grayscale(100%);
 }
 
+.content-album-play-img {
+  width: 30%;
+  height: 100%;
+  display: inline-block;
+  float: left;
+  position: relative;
+  top: 0;
+  object-fit: cover ;
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}
+
 .content-album-play img:hover {
   -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
   filter: grayscale(0%);
