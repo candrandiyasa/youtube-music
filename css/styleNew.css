@@ -635,14 +635,14 @@ body {
   position: fixed;
   width: 100%;
   bottom: 0;
-  height: 13vh;
+  height: 60px;
   overflow: hidden;
   background: rgba(233, 233, 233);
   z-index: 9980;
 }
 .player-content-left {
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   width: 100%;
 }
 .player-content-left a {
@@ -667,7 +667,7 @@ body {
     line-height: 24px;
   }
   .player-navbar {
-    height: 170px;
+    height: 140px;
     padding-top: 20px;
     z-index: 1;
   }

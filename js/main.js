@@ -7,14 +7,6 @@ $(window).on('scroll', function(){
   }
 });
 
-(function() {
-  $(".player-content-left").find('a').click(function() {
-    if ($(this).hasClass("random") || $(this).hasClass("play-pause") || $(this).hasClass("repeat")) {
-      return $(this).toggleClass("active");
-    }
-  });
-
-}).call(this);
 
 //----------start
 $('#playlist-menu').click(function(e){

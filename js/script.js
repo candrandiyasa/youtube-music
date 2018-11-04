@@ -32,6 +32,13 @@ function search(){
     clearArrays();
     //get input val
     query = $('#query').val();
+    if (!query){
+        var head = document.getElementById("res-header");
+        head.innerHTML = 'Trending';
+    } else {
+        var head = document.getElementById("res-header");
+        head.innerHTML = 'Search Results';
+    }
     //GET request on Youtube API V3
     $.get(
         "https://www.googleapis.com/youtube/v3/search",{
@@ -77,12 +84,9 @@ function search(){
                 //page buttons
                 var buttons = pageBtn(prevPageToken, nextPageToken);
                 $('#buttons').append(buttons);
-
             }
     );
 }
-
-
 
 //next page button function
 function nextPage(){
@@ -267,24 +271,28 @@ function onYouTubeIframeAPIReady() {
           //host: 'https://www.youtube.com',
           height: '1px',
           width: '1px',
-          videoId: 'M7lc1UVf-VE',
           enablejsapi: '1',
+          videoId: 'M7lc1UVf-VE',
           events: {
             'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
+            'onStateChange': onPlayerStateChange,
+            'onError': onPlayerError
           }
         });
       }
 function onPlayerReady(event) {
         //event.target.playVideo();
       }
+function onPlayerError(event) {
+        return nextSong();
+      }
 var timer;
 function onPlayerStateChange(event) {
     if (event.data == 0) {
-        return false;
+        //return false;
         $('#current').html('');
         $('#seek').val(0);
-         nextSong();
+        return nextSong();
     }
     if(event.data==1) { // playing
         timer = setInterval(function(){
@@ -308,12 +316,13 @@ function stop() {
     player.stopVideo();
 }
 
+var lost;
 function playVideo(element) {
         $('#song-title').html('');
         var songId = $(element).data('id');
         var songTitle = $(element).data('title');
         var duration = $(element).data('dur');
-        //console.log(songId);
+        console.log(songId);
         //console.log(songTitle);
         player.loadVideoById(songId, "small");
         i = list.indexOf(songId);
@@ -323,9 +332,13 @@ function playVideo(element) {
         var durationTag = document.getElementById("duration");
         durationTag.innerHTML = duration;
 
-        document.title = 'Project PPL - '+songTitle;
+        document.title = 'StreaMIX - '+songTitle;
 
+        lost = 'stop';
+        console.log(lost);
+        buttonPlayPress(lost);
 }
+
 function nextSong(){
     if(i<10){
        i = i+1;
@@ -336,7 +349,7 @@ function nextSong(){
     var songId = list[i];
     var songTitle = listTitle[i];
     var duration = listDur[i];
-    //console.log(songId);
+    console.log(songId);
     //console.log(songTitle);
     //console.log(i);
     player.loadVideoById(songId, "small");
@@ -345,7 +358,7 @@ function nextSong(){
     durationTag.innerHTML = duration;
     var titleText = '<small class="current">'+songTitle+'</small>';
     $('#song-title').append(titleText);
-    document.title = 'Project PPL - '+songTitle;
+    document.title = 'StreaMIX - '+songTitle;
 }
 function prevSong(){
     if(i>0){
@@ -357,21 +370,36 @@ function prevSong(){
     var songId = list[i];
     var songTitle = listTitle[i];
     var duration = listDur[i];
-    //console.log(songId);
+    console.log(songId);
     //console.log(i);
     player.loadVideoById(songId, "small");
     var titleText = '<small class="current">'+songTitle+'</small>';
     $('#song-title').append(titleText);
     var durationTag = document.getElementById("duration");
     durationTag.innerHTML = duration;
-    document.title = 'Project PPL - '+songTitle;
+    document.title = 'StreaMIX - '+songTitle;
 }
 function pause(){
     player.pauseVideo();
+    buttonPlayPress(lost);
 }
 
 function seekSong(){
     var seekVal = $('#seek').val() * (1000/seek[i]);
     player.seekTo(seekVal);
     //console.log(seekVal);
+}
+
+function buttonPlayPress(state) {
+    var cls = document.getElementById('playpausebtn');
+    if(state=='stop'){
+      state='play';
+      cls.setAttribute('class','fa fa-pause');
+    }
+    else if(state=='play'){
+      state='stop';
+      cls.setAttribute('class','fa fa-pause');
+    }
+    console.log("button play pressed, play was "+state);
+    console.log(state);
 }

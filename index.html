@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <title>Project PPL</title>
+  <title>StreaMIX - Listen To Musics From Youtube</title>
 
   <link rel="stylesheet" href="css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="css/styleNew.css">
@@ -14,7 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body>
+<body onload="return search();">
   <!-- this start CONTAINER for Navbar responsive -->
 
     <nav class="navbar">
@@ -91,8 +90,8 @@
   <!-- this start HEADER Content -->
   <div class="container-fluid">
     <div class="row justify-content-center">
-      <div class="col-sm-9" align="center" style="margin-top: 100px;">
-        <h4>Discovery your music from Youtube</h4>
+      <div class="col-sm-9" align="center" style="margin-top: 60px;">
+        <h4>Discover your music from Youtube</h4>
       </div>
     </div>
     <div class="row">
@@ -114,8 +113,8 @@
   <div class="container-custom">
     <div class="row justify-content-center">
       <div class="col-md-6">
-      <div class="iframe-api" id="player"></div>
-        <b class="nav-log">Search Results</b>
+      <div class="hidden-lg" id="player"></div>
+        <b class="nav-log" id="res-header">Trending</b>
       </div>
     </div>
   </div>
@@ -149,11 +148,11 @@
     <div class="container-fluid">
       <div class="row justify-content-center">
         <div class="col-sm-5">
-          <p>Project Piranti Lunak<br>
-            Institut Teknologi Indonesia | Copyright @ 2018</p>
+          <p>Informatics Students Of<br>
+            Technology Institute Of Indonesia</p>
         </div>
         <div class="col-sm-5">
-          <p align="right">Bantuan</p>
+          <p align="right">Help (?)</p>
         </div>
       </div>
     </div>
@@ -276,7 +275,7 @@
             <i class="fa fa-step-backward"></i>
           </a>
           <a href="#" class="play-pause" onclick="pause();return false;" id="pauseBtn">
-            <i class="fa fa-pause"></i>
+            <i class="fa fa-play" id="playpausebtn"></i>
           </a>
           <a href="#" class="stop" onclick="stop();return false;" id="stopBtn">
             <i class="fa fa-stop"></i>
