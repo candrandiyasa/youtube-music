@@ -300,15 +300,14 @@
               </div>
             </div>
             <div>
-                <input type="range" min="0" max="100" style="width: 520px;" id="seek" value="0" onclick="return seekSong();">
+                <input type="range" min="0" max="100" class="slider" style="width: 520px;" id="seek" value="0" onclick="return seekSong();">
             </div>
         </div>
       </div>
       <div class="col-lg-2">
-        <div class="player-content-left">
-          <a class="volume">
-            <i class="fa fa-volume-up"></i>
-          </a>
+        <div class="player-content-left" style="padding-left: 0px; display: flex;">
+          <i class="fa fa-volume-up" style="margin-top: 10px;"></i>
+          <input type="range" min="0" max="100" class="slider" value="0" style="width: 70px; margin: 18px 0px 0px 8px;">
           <a class="playlist-menu" id="playlist-menu">
             <i class="fa fa-th-list"></i>
           </a>
