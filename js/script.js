@@ -379,9 +379,15 @@ function prevSong(){
     durationTag.innerHTML = duration;
     document.title = 'StreaMIX - '+songTitle;
 }
+
 function pause(){
-    player.pauseVideo();
-    buttonPlayPress(lost);
+    if(lost == 'play'){
+      player.pauseVideo();
+      buttonPlayPress(lost);
+    }else if (lost == 'stop') {
+      player.playVideo();
+      buttonPlayPress(lost);
+    }
 }
 
 function seekSong(){
@@ -390,15 +396,16 @@ function seekSong(){
     //console.log(seekVal);
 }
 
+//function for button play and pause
 function buttonPlayPress(state) {
     var cls = document.getElementById('playpausebtn');
     if(state=='stop'){
-      state='play';
+      lost = 'play';
       cls.setAttribute('class','fa fa-pause');
     }
     else if(state=='play'){
-      state='stop';
-      cls.setAttribute('class','fa fa-pause');
+      lost = 'stop';
+      cls.setAttribute('class','fa fa-play');
     }
     console.log("button play pressed, play was "+state);
     console.log(state);

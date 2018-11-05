@@ -631,6 +631,9 @@ body {
 /* ------------------------------------------
       PLAYER NAVBAR
 ------------------------------------------ */
+.time small {
+  font-size: 9pt;
+}
 .player-navbar {
   position: fixed;
   width: 100%;
