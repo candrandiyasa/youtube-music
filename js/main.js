@@ -11,7 +11,7 @@ $(window).on('scroll', function(){
 //----------start
 $('#playlist-menu').click(function(e){
     // user session variable for access playlist
-    var userSession = 'acti';
+    var userSession = 'active';
 
     if (userSession == 'active'){
       e.stopPropagation();
