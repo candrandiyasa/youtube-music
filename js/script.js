@@ -236,7 +236,7 @@ function getOutput(item,details){
                             '</p>'+
                             '<b class="md-back">'+
                               '<a href="#" title="Play this video music" data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playVideo(this);return false;"><i class="fa">&#xf01d;</i> Play</a>'+
-                              '<a href="#" title="Set this music to my playlist"><i class="fa">&#xf196;</i> Set to MyPlaylist</a>'+
+                              '<a href="#" title="Set this music to my playlist" data-id="'+vidId+'" onclick="saveVideo(this);return false;"><i class="fa">&#xf196;</i> Set to MyPlaylist</a>'+
                             '</b>'+
                           '</div>'+
                         '</div>'+
@@ -337,6 +337,24 @@ function playVideo(element) {
         lost = 'stop';
         console.log(lost);
         buttonPlayPress(lost);
+}
+
+function saveVideo(element) {
+    var songId = $(element).data('id');
+    //console.log(songTitle);
+    //$.post("../db_access/db_login.php", { songId : songId });
+    $.ajax({
+        type: "POST",
+        //url: "../db_access/db_login.php",
+        url: "../db_access/db_test.php",
+        data: {songIdY : songId},
+        datatype: "json",
+        success:function(data){
+            alert('Success');
+        }
+    });
+
+    //console.log(songId);
 }
 
 function nextSong(){

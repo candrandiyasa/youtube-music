@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php 
+  include '../db_access/db_login.php';
+  // Check if user is not logged in
+  if (!$data->is_logged_in()) {
+    $data->redirect('../index.php');
+  }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +45,7 @@
               ?>
             </a>
           </li>
-          <li><a href="#">Log Out</a></li>
+          <li><a href="?logout=TRUE">Log Out</a></li>
         </ul>
       </div>
     </nav>

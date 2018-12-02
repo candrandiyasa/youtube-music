@@ -1,4 +1,11 @@
-<?php include 'db_access/db_login.php'; ?>
+<?php 
+  include 'db_access/db_login.php'; 
+  // Check if user is already logged in
+  if ($data->is_logged_in()) {
+    // Redirect logged in user to their home page
+    $data->redirect('user_page/index.php');
+  }  
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,10 +56,10 @@
           <br><br>
           <div class="modal-container-middle">
             <form method="POST">
-              <input type="text" placeholder="Your Username">
-              <input type="password" placeholder="Your Password" style="float: left;">
-              <input type="password" placeholder="Confirmation Password" style="float: right;">
-              <input type="email" placeholder="Your Email">
+              <input type="text" placeholder="Your Username" name="username">
+              <input type="password" placeholder="Your Password" style="float: left;" name="password">
+              <input type="password" placeholder="Confirmation Password" style="float: right;" name="confirmpassword">
+              <input type="email" placeholder="Your Email" name="email">
               <input type="submit" value="Sign Up" name="createaccount">
             </form>
             <br>
@@ -179,90 +186,6 @@
               <i class="fa">&#xf142;</i>
             </div>
           </div>
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="fa">&#xf142;</i>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="fa">&#xf142;</i>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="fa">&#xf142;</i>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="fa">&#xf142;</i>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="fa">&#xf142;</i>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="fa">&#xf142;</i>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="fa">&#xf142;</i>
-            </div>
-          </div>
         </div>
     </div>
 
@@ -291,26 +214,28 @@
         <div class="player-content-time">
             <div class="time">
               <div class="row">
-                <div class="col-md-9">
+                <div class="col-lg-9">
                   <small class="title-player" id="song-title"></small><!-- current song title deployed here-->
                 </div>
-                <div class="col-md-3" align="right">
+                <div class="col-lg-3" align="right">
                   <small class="current" id="current">0:0</small>
                   <small class="current"> / </small>
                   <small class="duration" id="duration">0:0</small>
                 </div>
               </div>
-            </div>
-            <div>
-                <input type="range" min="0" max="100" class="slider" style="width: 520px;" id="seek" value="0" onclick="return seekSong();">
+              <div class="row">
+                <div class="col-lg-12" >
+                  <input type="range" min="0" max="100" class="slider" style="width: 100%; position: absolute; top: 5px; left: 0px; right: 0px; padding: 0px; margin: 0px;" id="seek" value="0" onclick="return seekSong();">
+                </div>
+              </div>
             </div>
         </div>
       </div>
       <div class="col-lg-2">
-        <div class="player-content-left" style="padding-left: 0px; display: flex;">
+        <div class="player-content-left" style="padding-left: 0px; ">
           <i class="fa fa-volume-up" style="margin-top: 10px;" id="mute-toggle"></i>
-          <input type="range" min="0" max="100" class="slider" id="volume-input" value="0" style="width: 70px; margin: 18px 0px 0px 8px;">
-          <a class="playlist-menu" id="playlist-menu">
+          <input type="range" min="0" max="100" class="slider" id="volume-input" value="0" style="width: 70px;">
+          <a class="playlist-menu" onclick="document.getElementById('md-account-login').style.display='block'">
             <i class="fa fa-th-list"></i>
           </a>
         </div>
