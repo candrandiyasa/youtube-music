@@ -9,9 +9,9 @@ $(function(){
 var apiKey = 'AIzaSyBM7U5jft6XHLqfNfo1ZN3ZKg744gx_76w';
 
 //required vars and arrays
-var index=1, i=0;
-var list = [], listTitle = [], listDur = [], seek = [];
-
+var index=1, i=0, state = 'other';
+var list = [], listTitle = [], listDur = [], seek = []; //for reg playlist
+var listPl = [], listPlTitle = [], listPlDur = [], seekPl = []; //for custom playlist
 //calling iframe API asynchronously
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
@@ -224,6 +224,7 @@ function getOutput(item,details){
     var isoTime = details.contentDetails.duration;
     var time = moment.duration(isoTime);
     var duration = time.format('m:s', {trim:false});
+    var seekTimePl = time.format('s', {trim: false});
     var output ='<div class="col-md-10">'+
                   '<div class="content-album-play">'+
                     '<img src="'+img+'">'+
@@ -231,17 +232,17 @@ function getOutput(item,details){
                       '<div class="col-md-12">'+
                         '<div class="row">'+
                           '<div class="col-md-12">'+
-                            '<p data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playVideo(this);return false;">'+title+'<br>'+
+                            '<p data-dur="'+duration+'" data-title="'+title+'" data-state="other" data-id="'+vidId+'" onclick="playSong(this);return false;">'+title+'<br>'+
                               '<small>'+duration+' uploaded by '+channel+'</small>'+
                             '</p>'+
                             '<b class="md-back">'+
-                              '<a href="#" title="Play this video music" data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playVideo(this);return false;"><i class="fa">&#xf01d;</i> Play</a>'+
-                              '<a href="#" title="Set this music to my playlist" data-id="'+vidId+'" onclick="saveVideo(this);return false;"><i class="fa">&#xf196;</i> Set to MyPlaylist</a>'+
+                              '<a href="#" title="Play this video music" data-state="other" data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playSong(this);return false;"><i class="fa">&#xf01d;</i> Play</a>'+
+                              '<a href="#" title="Set this music to my playlist" data-dur="'+duration+'" data-id="'+vidId+'" data-title="'+title+'" data-channel="'+channel+'" data-seek="'+seekTimePl+'" onclick="addList(this);return false;"><i class="fa">&#xf196;</i> Add To Playlist</a>'+
                             '</b>'+
                           '</div>'+
                         '</div>'+
                         '<div class="phone-list">'+
-                          '<div class="row" data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playVideo(this);return false;">'+
+                          '<div class="row" data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playSong(this);return false;">'+
                             '<div class="col-md-12">'+
                               '<label title="Set this music to my playlist">Set to MyPlaylist</label>'+
                             '</div>'+
@@ -281,7 +282,7 @@ function onYouTubeIframeAPIReady() {
         });
       }
 function onPlayerReady(event) {
-        //event.target.playVideo();
+        //event.target.playSong();
       }
 function onPlayerError(event) {
         return nextSong();
@@ -303,7 +304,12 @@ function onPlayerStateChange(event) {
             //console.log(current);
             var currentTag = document.getElementById("current");
             currentTag.innerHTML = current;
-            $('#seek').val(currentSec * (100 / seek[i]));
+            if(state == 'playlist'){
+                $('#seek').val(currentSec * (100 / seekPl[i]));
+            }
+            else{
+                $('#seek').val(currentSec * (100 / seek[i]));
+            }
 
         }, 1000); // 100 means repeat in 100 ms
 
@@ -317,15 +323,22 @@ function stop() {
 }
 
 var lost;
-function playVideo(element) {
+function playSong(element) {
         $('#song-title').html('');
         var songId = $(element).data('id');
         var songTitle = $(element).data('title');
         var duration = $(element).data('dur');
+        state = $(element).data('state');
         console.log(songId);
-        //console.log(songTitle);
+        console.log('state:',state);
         player.loadVideoById(songId, "small");
-        i = list.indexOf(songId);
+        if (state == 'playlist'){
+            i = listPl.indexOf(songId);
+            console.log('index playlist: ', i);
+        }
+        else{
+            i = list.indexOf(songId);
+        }
         //console.log(i);
         var titleText = '<small class="current">'+songTitle+'</small>';
         $('#song-title').append(titleText);
@@ -358,15 +371,25 @@ function saveVideo(element) {
 }
 
 function nextSong(){
-    if(i<10){
-       i = i+1;
-    } else {
-        i = 9;
+    if(i == listPl.length || i == list.length){
+        i = 0;
     }
+    else{
+        i = i+1;
+    }
+    if (state == 'playlist'){
+        var songId = listPl[i];
+        var songTitle = listPlTitle[i];
+        var duration = listPlDur[i];
+    }
+    else{
+        var songId = list[i];
+        var songTitle = listTitle[i];
+        var duration = listDur[i];
+    }
+    console.log(state);
+    console.log(i);
     $('#song-title').html('');
-    var songId = list[i];
-    var songTitle = listTitle[i];
-    var duration = listDur[i];
     console.log(songId);
     //console.log(songTitle);
     //console.log(i);
@@ -380,14 +403,22 @@ function nextSong(){
 }
 function prevSong(){
     if(i>0){
-       i = i-1;
-    } else {
-        i = 0;
+        i = i-1;
+     } else {
+         i = 0;
+     }
+    if (state == 'playlist'){
+        var songId = listPl[i];
+        var songTitle = listPlTitle[i];
+        var duration = listPlDur[i];
     }
+    else{
+        var songId = list[i];
+        var songTitle = listTitle[i];
+        var duration = listDur[i];
+    }
+    console.log(state);
     $('#song-title').html('');
-    var songId = list[i];
-    var songTitle = listTitle[i];
-    var duration = listDur[i];
     console.log(songId);
     //console.log(i);
     player.loadVideoById(songId, "small");
@@ -403,13 +434,18 @@ function pause(){
       player.pauseVideo();
       buttonPlayPress(lost);
     }else if (lost == 'stop') {
-      player.playVideo();
+      player.playSong();
       buttonPlayPress(lost);
     }
 }
 
 function seekSong(){
-    var seekVal = $('#seek').val() * (1000/seek[i]);
+    if(state == 'playlist'){
+        var seekVal = seekPl[i]*($('#seek').val() / 100);
+    }
+    else{
+        var seekVal =seek[i]*($('#seek').val() / 100);
+    }
     player.seekTo(seekVal);
     //console.log(seekVal);
 }
@@ -427,4 +463,33 @@ function buttonPlayPress(state) {
     }
     console.log("button play pressed, play was "+state);
     console.log(state);
+}
+
+//PLAYLIST ONLY
+function addList(element){
+    var songId = $(element).data('id');
+    var songTitle = $(element).data('title');
+    var upBy = $(element).data('channel');
+    var songDur = $(element).data('dur');
+    var seekTimeP = $(element).data('seek');
+    var listVal = '<div class="row">'+
+                    '<div class="col-8">'+
+                        '<span>'+
+                            '<b>'+songTitle+'</b><br>'+
+                            '<small>Uploaded by: '+upBy+'</small>'+
+                        '</span>'+
+                    '</div>'+
+                    '<div class="col-3">'+
+                        '<a href="#" class="fa" align="left" title="Play Music Playlist" data-state="playlist" data-dur="'+songDur+'" data-title="'+songTitle+'" data-id="'+songId+'" onclick="playSong(this);return false;">&#xf04b;</a>'+
+                        '<i class="fa">&#xf142;</i>'+
+                    '</div>'+
+                '</div>';
+    $('#playlist-item').append(listVal);
+    listPl.push(songId);
+    listPlTitle.push(songTitle);
+    listPlDur.push(songDur);
+    seekPl.push(seekTimeP);
+    console.log(listPl);
+    console.log(seekPl);
+
 }
