@@ -638,7 +638,7 @@ body {
   position: fixed;
   width: 100%;
   bottom: 0;
-  height: 45px;
+  height: 55px;
   overflow: hidden;
   background: rgba(233, 233, 233);
   z-index: 9980;
@@ -866,6 +866,17 @@ body {
   box-shadow: 3px 3px 7px rgb(218, 217, 217);
 }
 
+.playlist-menu-sett {
+  padding: 15px;
+  border: none;
+  width: 90%;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-around;
+  color: #6e6e6e;
+  margin-top: 20px;
+}
 /* ------------------------------------------
       Seeek css
 ------------------------------------------ */

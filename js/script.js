@@ -343,18 +343,28 @@ function saveVideo(element) {
     var songId = $(element).data('id');
     //console.log(songTitle);
     //$.post("../db_access/db_login.php", { songId : songId });
-    $.ajax({
+    /*$.ajax({
         type: "POST",
         //url: "../db_access/db_login.php",
-        url: "../db_access/db_test.php",
-        data: {songIdY : songId},
+        url: "../db_access/db_login.php?songIdY="+songId,
+        data: songId,
         datatype: "json",
-        success:function(data){
+        success:function(response){
             alert('Success');
         }
+    });*/
+    $.post('../db_access/db_login.php?p=add', {songId : songId}, function(data){
+        viewData();
+        alert('Success');
     });
 
     //console.log(songId);
+}
+
+function viewData(){
+    $.get('../user_page/index.php', function(data){
+        $('tbody').class('playlist-item')
+    })
 }
 
 function nextSong(){

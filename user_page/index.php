@@ -128,6 +128,13 @@
         <div class="row">
           <div class="col-md-12" style="margin-bottom: 40px;">
             <label>Your Playlist</label>
+            
+            <div class="playlist-menu-sett">
+                <!--button deployed here-->
+                <a href="#" title="Save Queue"><i style="font-size:24px" class="fa">&#xf01c;</i></a>
+                <a href="#" title="Play All Playlist"><i style="font-size:24px" class="fa">&#xf04b;</i></a>
+                <a href="#" title="Delete Playlist"><i style="font-size:24px" class="fa">&#xf014;</i></a>
+              </div>
           </div>
         </div>
         <div class="playlist-item">
@@ -227,6 +234,7 @@
               <i class="fa">&#xf142;</i>
             </div>
           </div>
+          
         </div>
     </div>
 
@@ -255,18 +263,20 @@
         <div class="player-content-time">
             <div class="time">
               <div class="row">
-                <div class="col-md-9">
+                <div class="col-lg-9">
                   <small class="title-player" id="song-title"></small><!-- current song title deployed here-->
                 </div>
-                <div class="col-md-3" align="right">
+                <div class="col-lg-3" align="right">
                   <small class="current" id="current">0:0</small>
                   <small class="current"> / </small>
                   <small class="duration" id="duration">0:0</small>
                 </div>
               </div>
-            </div>
-            <div>
-                <input type="range" min="0" max="100" class="slider" style="width: 520px;" id="seek" value="0" onclick="return seekSong();">
+              <div class="row">
+                <div class="col-lg-12" >
+                  <input type="range" min="0" max="100" class="slider" style="width: 100%; position: absolute; top: 5px; left: 0px; right: 0px; padding: 0px; margin: 0px;" id="seek" value="0" onclick="return seekSong();">
+                </div>
+              </div>
             </div>
         </div>
       </div>
