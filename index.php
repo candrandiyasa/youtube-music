@@ -13,10 +13,10 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <title>StreaMIX - Listen To Musics From Youtube</title>
+  <title>MYOUSICS - Listen To Musics From Youtube</title>
 
   <link rel="stylesheet" href="css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="css/styleNew.css">
+  <link rel="stylesheet" href="css/styleNew-min.css">
 
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -35,7 +35,7 @@
       </label>
       <div class="logo">
         <img src="img/logo.png">
-        <a href="#">StreaMIX</a>
+        <a href="#">mYouSics</a>
       </div>
       <div class="nav-wrapper">
         <ul>

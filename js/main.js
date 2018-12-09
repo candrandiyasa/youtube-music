@@ -31,6 +31,7 @@ $('body,html').click(function(e){
 });
 //--------------end
 
+
 function loginOpen(){
   // if(){
     alert('Data Berhasil Di Simpan');
@@ -63,32 +64,29 @@ $('#volume-input').on('change', function () {
 });
 
 
+          //context menu playlist
+            var tableContextMenu = null;
 
-/* sticky position for navbar content
-$(function(){
-        // Check the initial Poistion of the Sticky Header
-        var stickyHeaderTop = $('.container-custom').offset().top;
+            $(document).ready(function(){
+                var options = {
+                    openCallBack: function(contextMenu) {
+                        contextMenu.disableMenuItem("Warning Item");
+                    }
+                };
+                tableContextMenu = new ContextMenu("context-menu-items", menuItemClickListener);
+                tableContextMenu.disableMenuItem(1);
+            });
 
-        $(window).scroll(function(){
-                if( $(window).scrollTop() > stickyHeaderTop ) {
-                        $('.container-custom').css({position: 'fixed', top: '65px'});
-                } else {
-                        $('.container-custom').css({position: 'static'});
+            function menuItemClickListener(menu_item, parent)
+            {
+                if (menu_item.text() === "Re-enable item 2")
+                {
+                    tableContextMenu.enableMenuItem("Item 2");
+                    //As we can't enable item 2 again, then why not disable the menu item to re-enable
+                    tableContextMenu.disableMenuItem(3);
                 }
-        });
-  });
-*/
-
-/* catatan sticky position nanti
-var  mn = $(".container-custom");
-    mns = "sticky";
-    hdr = $('.container-custom').height() + $('.container-fluid').height();
-
-$(window).scroll(function() {
-  if( $(this).scrollTop() > hdr ) {
-    mn.addClass(mns);
-  } else {
-    mn.removeClass(mns);
-  }
-});
-*/
+                else
+                {
+                    alert("Menu Item Clicked: " + menu_item.text() + "\nRecord ID: " + parent.attr("data-row-id"));
+                }
+            }

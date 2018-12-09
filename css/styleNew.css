@@ -792,7 +792,7 @@ body {
   z-index: 100001;
   color: #000;
   padding: 30px 0px 30px 30px;
-  background-color: #fff;
+  background-color: rgb(255, 255, 255);
   box-shadow: 0px 0px 20px #a8a8a8;
   overflow: auto;
   overflow-x: hidden;
@@ -844,6 +844,7 @@ body {
   color: inherit;
 }
 .playlist-item i {
+  font-style: normal;
   float: right;
   position: absolute;
   right: 0px;

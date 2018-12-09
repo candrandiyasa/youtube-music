@@ -12,48 +12,59 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <title>StreaMIX - Listen To Musics From Youtube</title>
+  <title>MYOUSICS - Listen To Musics From Youtube</title>
 
   <link rel="stylesheet" href="../css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="../css/styleNew.css">
+  <link rel="stylesheet" href="../css/styleNew-min.css">
+  <link rel="stylesheet" href="../css/context-menu.css">
 
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body onload="return search();">
+  <!-- context item for playlist item and it's hide, showing after click 3dot -->
+  <div class="context-menu-container" id="context-menu-items">
+    <ul>
+      <li>Detail </li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+      <li>Re-enable item 2</li>
+      <li class="warning">Warning Item</li>
+      <li class="danger">Delete Item</li>
+    </ul>
+  </div>
+
   <!-- this start CONTAINER for Navbar responsive -->
-
-    <nav class="navbar">
-      <input type="checkbox" id="nav" class="hidden">
-      <!-- this label for responsive menu screen max. 864px -->
-      <label for="nav" class="nav-btn">
-        <i></i>
-        <i></i>
-        <i></i>
-      </label>
-      <div class="logo">
-        <img src="../img/logo.png">
-        <a href="#">StreaMIX</a>
-      </div>
-      <div class="nav-wrapper">
-        <ul>
-          <li>Hei,
-            <a href="#">
-              <?php
-                echo $_SESSION["username"];
-              ?>
-            </a>
-          </li>
-          <li><a href="?logout=TRUE">Log Out</a></li>
-        </ul>
-      </div>
-    </nav>
-
+  <nav class="navbar">
+    <input type="checkbox" id="nav" class="hidden">
+    <!-- this label for responsive menu screen max. 864px -->
+    <label for="nav" class="nav-btn">
+      <i></i>
+      <i></i>
+      <i></i>
+    </label>
+    <div class="logo">
+      <img src="../img/logo.png">
+      <a href="#">MYOUSICS</a>
+    </div>
+    <div class="nav-wrapper">
+      <ul>
+        <li>Hei,
+          <a href="#">
+            <?php
+              echo $_SESSION["username"];
+            ?>
+          </a>
+        </li>
+        <li><a href="?logout=TRUE">Log Out</a></li>
+      </ul>
+    </div>
+  </nav>
   <!-- this end CONTAINER for Navbar responsive -->
 
 <div class="container-body">
-  <!-- this start HEADER Content -->
+  <!-- this start HEADER (search) Content -->
   <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-sm-9" align="center" style="margin-top: 60px;">
@@ -71,7 +82,7 @@
       </div>
     </div>
   </div>
-  <!-- this end HEADER Content -->
+  <!-- this end HEADER (search) Content -->
 
   <br><br><br>
 
@@ -85,29 +96,28 @@
     </div>
   </div>
   <!-- this end NAVBAR Content -->
-
 </div>
+
 
   <div class="container-fluid"></br>
       <div class="row justify-content-center">
         <div class="col-sm-8">
-
           <!-- section 1 -->
           <div class="row justify-content-center" id="results">
             <!-- results deployed here-->
           </div>
-
         </div>
       </div>
       <!-- pagination-->
-          <div class="row justify-content-center" style="padding-top: 30px">
-            <div class="col-md-6" align="center">
-              <div class="pagination-button" id="buttons">
-                <!--button deployed here-->
-              </div>
-            </div>
+      <div class="row justify-content-center" style="padding-top: 30px">
+        <div class="col-md-6" align="center">
+          <div class="pagination-button" id="buttons">
+            <!--button deployed here-->
           </div>
+        </div>
+      </div>
   </div>
+
 
 
   <div class="footer-cus">
@@ -123,13 +133,13 @@
       </div>
     </div>
   </div>
+    
 
     <div class="playlist-container" id="playlist-container">
         <div class="row">
           <div class="col-md-12" style="margin-bottom: 40px;">
             <label>Your Playlist</label>
-            
-            <div class="playlist-menu-sett">
+              <div class="playlist-menu-sett">
                 <!--button deployed here-->
                 <a href="#" title="Save Queue"><i style="font-size:24px" class="fa">&#xf01c;</i></a>
                 <a href="#" title="Play All Playlist"><i style="font-size:24px" class="fa">&#xf04b;</i></a>
@@ -147,94 +157,10 @@
             </div>
             <div class="col-3">
               <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="fa">&#xf142;</i>
+              <i class="context-menu" data-container-id="context-menu-items" data-row-id="1"></i>
             </div>
           </div>
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="fa">&#xf142;</i>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="fa">&#xf142;</i>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="fa">&#xf142;</i>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="fa">&#xf142;</i>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="fa">&#xf142;</i>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="fa">&#xf142;</i>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="fa">&#xf142;</i>
-            </div>
-          </div>
-          
+          <!-- next playlist item here -->          
         </div>
     </div>
 
@@ -290,6 +216,7 @@
         </div>
       </div>
   </div>
+
 <!--script src="https://www.youtube.com/iframe_api"></script-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
@@ -297,5 +224,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/1.3.0/moment-duration-format.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
 <script src="../js/main.js"></script>
+<script src="../js/context-menu.js"></script>
 </body>
 </html>
