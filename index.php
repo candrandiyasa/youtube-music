@@ -15,6 +15,8 @@
 
   <title>MYOUSICS - Listen To Musics From Youtube</title>
 
+  <link rel="icon" href="img/logo.png">
+
   <link rel="stylesheet" href="css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="css/styleNew-min.css">
 

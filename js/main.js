@@ -43,11 +43,13 @@ function loginOpen(){
 }
 
 // audio control
+
+/*var vls = $('#mute-toggle');
+
+*/
 $('#mute-toggle').on('click', function() {
     var vls = document.getElementById('mute-toggle');
-    var rls = document.getElementById('mute-toggle');
-
-    var mute_toggle = $(this);
+    //var mute_toggle = $(this);
 
     if(player.isMuted()){
         player.unMute();
@@ -60,7 +62,7 @@ $('#mute-toggle').on('click', function() {
 });
 
 $('#volume-input').on('change', function () {
-    player.setVolume($(this).val());
+  player.setVolume($(this).val());
 });
 
 

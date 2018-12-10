@@ -345,7 +345,7 @@ function playSong(element) {
         var durationTag = document.getElementById("duration");
         durationTag.innerHTML = duration;
 
-        document.title = 'StreaMIX - '+songTitle;
+        document.title = 'MYOUSICS - '+songTitle;
 
         lost = 'stop';
         console.log(lost);
@@ -409,7 +409,7 @@ function nextSong(){
     durationTag.innerHTML = duration;
     var titleText = '<small class="current">'+songTitle+'</small>';
     $('#song-title').append(titleText);
-    document.title = 'StreaMIX - '+songTitle;
+    document.title = 'MYOUSICS - '+songTitle;
 }
 function prevSong(){
     if(i>0){
@@ -436,7 +436,7 @@ function prevSong(){
     $('#song-title').append(titleText);
     var durationTag = document.getElementById("duration");
     durationTag.innerHTML = duration;
-    document.title = 'StreaMIX - '+songTitle;
+    document.title = 'MYOUSICS - '+songTitle;
 }
 
 function pause(){

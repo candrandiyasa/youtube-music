@@ -14,8 +14,10 @@
 
   <title>MYOUSICS - Listen To Musics From Youtube</title>
 
+  <link rel="icon" href="../img/logo.png">
+
   <link rel="stylesheet" href="../css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="../css/styleNew-min.css">
+  <link rel="stylesheet" href="../css/styleNew.css">
   <link rel="stylesheet" href="../css/context-menu.css">
 
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
@@ -209,7 +211,7 @@
       <div class="col-lg-2">
         <div class="player-content-left" style="padding-left: 0px; display: flex;">
           <i class="fa fa-volume-up" style="margin-top: 10px;" id="mute-toggle"></i>
-          <input type="range" min="0" max="100" class="slider" id="volume-input" value="0" style="width: 70px; margin: 18px 0px 0px 8px;">
+          <input type="range" min="0" max="100" class="slider" id="volume-input" style="width: 70px; margin: 18px 0px 0px 8px;">
           <a class="playlist-menu" id="playlist-menu">
             <i class="fa fa-th-list"></i>
           </a>
