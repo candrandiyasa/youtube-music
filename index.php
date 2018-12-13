@@ -1,10 +1,10 @@
 <?php 
-  //include 'db_access/db_login.php'; 
+  include 'db_access/db_login.php'; 
   // Check if user is already logged in
-  //if ($data->is_logged_in()) {
-    // Redirect logged in user to their home page
-    //$data->redirect('user_page/index.php');
-  //}  
+  if ($data->is_logged_in()) {
+   // Redirect logged in user to their home page
+  $data->redirect('user_page/index.php');
+  }  
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +81,7 @@
           <small>Make your playlist music for free</small>
           <br><br>
           <div class="modal-container-middle">
-            <form method="POST">
+            <form method="POST" action="db_access/db_login.php">
               <input type="text" name="username" required="" placeholder="Username or Email">
               <input type="password" name="password" required="" placeholder="Your Password" style="float: left; width: 100%;">
               <input type="submit" value="Log In" name="login">
