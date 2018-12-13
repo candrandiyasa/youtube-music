@@ -503,3 +503,45 @@ function addList(element){
     console.log(seekPl);
 
 }
+function playAllOnList(){
+    $('#song-title').html('');
+    var songId = listPl[0];
+    var songTitle = listPlTitle[0];
+    var duration = listPlDur[0];
+    state = 'playlist';
+    i = listPl.indexOf(songId);
+    console.log(songId);
+    console.log('state:',state);
+    player.loadVideoById(songId, "small");
+    var titleText = '<small class="current">'+songTitle+'</small>';
+    $('#song-title').append(titleText);
+    var durationTag = document.getElementById("duration");
+    durationTag.innerHTML = duration;
+
+    document.title = 'MYousics- '+songTitle;
+
+    lost = 'stop';
+    console.log(lost);
+    buttonPlayPress(lost);
+}
+function clearPlaylist(){
+    $('#playlist-item').html('');
+    listPl = [], listPlTitle = [], listPlDur = [], seekPl = [];
+}
+function savePlaylist() {
+    var songId = $(element).data('id');
+    //console.log(songTitle);
+    //$.post("../db_access/db_login.php", { songId : songId });
+    $.ajax({
+        type: "POST",
+        //url: "../db_access/db_login.php",
+        url: "../db_access/db_test.php",
+        data: {songIdY : songId},
+        datatype: "json",
+        success:function(data){
+            alert('Success');
+        }
+    });
+
+    //console.log(songId);
+}
