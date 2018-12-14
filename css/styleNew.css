@@ -35,7 +35,7 @@ body {
   width: 100%;
   background-color: #ffffff;
   display: flex;
-  z-index: 9999;
+  z-index: 9978;
   justify-content: space-around;
 }
 
@@ -791,7 +791,7 @@ body {
   bottom: 0px;
   max-width: 400px;
   height: 100%;
-  z-index: 100001;
+  z-index: 9979;
   color: #000;
   padding: 30px 0px 30px 30px;
   background-color: rgb(255, 255, 255);
@@ -880,6 +880,10 @@ body {
   color: #6e6e6e;
   margin-top: 20px;
 }
+
+.pinPlaylistActive{
+  color: #ec0b0b !important;
+}
 /* ------------------------------------------
       Seeek css
 ------------------------------------------ */
@@ -917,7 +921,7 @@ body {
 }
 
 /* ------------------------------------------
-      DROPDOWN CONTENT
+      TOGGLE BUTTON
 ------------------------------------------ */
 
 

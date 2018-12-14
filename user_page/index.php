@@ -143,6 +143,7 @@
             <label>Your Playlist</label>
               <div class="playlist-menu-sett">
                 <!--button deployed here-->
+                <a href="#" title="Fixed Position Playlist Menu" id="fixedPlaylist"><i style="font-size:24px" class="fa">&#xf08d;</i></a>
                 <a href="#" title="Save Queue"><i style="font-size:24px" class="fa">&#xf01c;</i></a>
                 <a href="#" title="Play All Playlist"><i style="font-size:24px" class="fa">&#xf04b;</i></a>
                 <a href="#" title="Delete Playlist"><i style="font-size:24px" class="fa">&#xf014;</i></a>
@@ -170,9 +171,9 @@
     <div class="row justify-content-center">
       <div class="col-lg-3">
         <div class="player-content-left">
-          <a class="random">
+          <!--<a class="random">
             <i class="fa fa-random"></i>
-          </a>
+          </a>-->
           <a href="#" class="prev" onclick="prevSong();return false;" id="prevBtn">
             <i class="fa fa-step-backward"></i>
           </a>

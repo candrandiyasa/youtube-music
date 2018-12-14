@@ -1,10 +1,10 @@
 <?php 
-  //include 'db_access/db_login.php'; 
+  include 'db_access/db_login.php'; 
   // Check if user is already logged in
-  //if ($data->is_logged_in()) {
+  if ($data->is_logged_in()) {
     // Redirect logged in user to their home page
-    //$data->redirect('user_page/index.php');
-  //}  
+    $data->redirect('user_page/index.php');
+  }  
 ?>
 
 <!DOCTYPE html>
@@ -176,6 +176,7 @@
           </div>
         </div>
         <div class="playlist-item">
+        
           <div class="row">
             <div class="col-8">
               <span>
@@ -188,6 +189,7 @@
               <i class="fa">&#xf142;</i>
             </div>
           </div>
+
         </div>
     </div>
 
@@ -234,9 +236,9 @@
         </div>
       </div>
       <div class="col-lg-2">
-        <div class="player-content-left" style="padding-left: 0px; ">
+        <div class="player-content-left" style="padding-left: 0px; display: flex;">
           <i class="fa fa-volume-up" style="margin-top: 10px;" id="mute-toggle"></i>
-          <input type="range" min="0" max="100" class="slider" id="volume-input" value="0" style="width: 70px;">
+          <input type="range" min="0" max="100" class="slider" id="volume-input" value="0" style="width: 70px; margin: 18px 0px 0px 8px;">
           <a class="playlist-menu" onclick="document.getElementById('md-account-login').style.display='block'">
             <i class="fa fa-th-list"></i>
           </a>
