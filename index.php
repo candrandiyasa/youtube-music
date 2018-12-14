@@ -81,7 +81,7 @@
           <small>Make your playlist music for free</small>
           <br><br>
           <div class="modal-container-middle">
-            <form method="POST" action="db_access/db_login.php">
+            <form method="POST">
               <input type="text" name="username" required="" placeholder="Username or Email">
               <input type="password" name="password" required="" placeholder="Your Password" style="float: left; width: 100%;">
               <input type="submit" value="Log In" name="login">
