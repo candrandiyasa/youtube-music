@@ -2,13 +2,8 @@
   include 'db_access/db_login.php'; 
   // Check if user is already logged in
   if ($data->is_logged_in()) {
-<<<<<<< HEAD
     // Redirect logged in user to their home page
     $data->redirect('user_page/index.php');
-=======
-   // Redirect logged in user to their home page
-  $data->redirect('user_page/index.php');
->>>>>>> a109c5ddcd2a4bcac6b0d61d253308115843c3de
   }  
 ?>
 
