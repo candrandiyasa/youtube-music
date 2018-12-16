@@ -5,7 +5,6 @@
     $data->redirect('../index.php');
   }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -151,18 +150,32 @@
           </div>
         </div>
         <div class="playlist-item">
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="context-menu" data-container-id="context-menu-items" data-row-id="1"></i>
-            </div>
-          </div>
+          
+          <?php 
+          $get_playlist_data = $data->select_query("tb_playlist_user", $_SESSION['id_usr']);
+          
+          if(mysqli_num_rows($get_playlist_data) > 0){
+            while($show_data = mysqli_fetch_array($get_playlist_data)){
+            $id_playlist_data = $show_data['id_song'];
+          ?>
+              <div class="row">
+                <div class="col-8">
+                  <span>
+                    <b><?php echo $show_data['title_song']; ?></b><br>
+                    <small>by <?php echo $show_data['channel_song']; ?></small>
+                  </span>
+                </div>
+                <div class="col-3">
+                  <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
+                  <i class="context-menu" data-container-id="context-menu-items" data-row-id="1"></i>
+                </div>  
+              </div>
+          <?php 
+            }
+          }else{
+            echo "0 result";
+          }
+          ?>
           <!-- next playlist item here -->          
         </div>
     </div>

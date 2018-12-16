@@ -237,7 +237,7 @@ function getOutput(item,details){
                             '</p>'+
                             '<b class="md-back">'+
                               '<a href="#" title="Play this video music" data-state="other" data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playSong(this);return false;"><i class="fa">&#xf01d;</i> Play</a>'+
-                              '<a href="#" title="Set this music to my playlist" data-dur="'+duration+'" data-id="'+vidId+'" data-title="'+title+'" data-channel="'+channel+'" data-seek="'+seekTimePl+'" onclick="saveVideo(this);return false;"><i class="fa">&#xf196;</i> Add To Playlist</a>'+
+                              '<a href="#" title="Set this music to my playlist" data-dur="'+duration+'" data-id="'+vidId+'" data-title="'+title+'" data-channel="'+channel+'" data-seek="'+seekTimePl+'" onclick="saveVideo(this); return false;"><i class="fa">&#xf196;</i> Add To Playlist</a>'+
                             '</b>'+
                           '</div>'+
                         '</div>'+
@@ -354,11 +354,19 @@ function playSong(element) {
 
 function saveVideo(element) {
     var songId = $(element).data('id');
-    console.log(songId);
+    var titleSong = $(element).data('title');
+    var channelSong = $(element).data('channel');
+    var durationSong = $(element).data('dur');
+
+    //console.log(songId);
     $.ajax({
         url: "../db_access/db_login.php",
         method: "POST",
-        data: { songId : JSON.stringify(songId) },
+        data: { songId : JSON.stringify(songId), 
+                titleSong : JSON.stringify(titleSong), 
+                channelSong : JSON.stringify(channelSong), 
+                durationSong : JSON.stringify(durationSong) 
+              },
         success:function(res){
             alert('Data berhasil tersimpan');
             console.log(res);

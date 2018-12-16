@@ -55,12 +55,21 @@
   
   else if(isset($_POST['songId'])){
       $songId = $_POST['songId'];
+      $titleSong = $_REQUEST['titleSong'];
+      $channelSong = $_REQUEST['channelSong'];
+      $durationSong = $_REQUEST['durationSong'];
       $songId = trim($songId,'"');
+      $titleSong  = trim($titleSong ,'"');
+      $channelSong = trim($channelSong,'"');
+      $durationSong = trim($durationSong,'"');
 
       $field = array(
           'id_song' => $songId,
+          'title_song' => $titleSong,
+          'channel_song' => $channelSong,
+          'duration_song' => $durationSong,
           'id_usr' => $_SESSION['id_usr'],
-          'date' => date("Y-m-d H:i:s")
+          'date_save' => date("Y-m-d H:i:s")
       );
       if(!($data->select_data("tb_playlist_user", $field))){
           if($data->create_data("tb_playlist_user", $field)){

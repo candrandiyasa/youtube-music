@@ -73,7 +73,7 @@
     }
 
     public function get_id_usr($table_name, $where){
-        $query = "SELECT id_usr FROM ".$table_name." WHERE username_usr = '" . $where . "'";
+        $query = "SELECT id_usr FROM " . $table_name . " WHERE username_usr = '" . $where . "'";
         $result = mysqli_query($this->con, $query);
         if($getid = mysqli_fetch_assoc($result) > 0){
             $feth = $getid;
@@ -82,6 +82,13 @@
             $this->error = "You have problem, cek your data";
             //echo "<script>alert('Username and password are not available, please enter again');</script>";
         }
+    }
+
+    public function select_query($table_name, $where){
+        $query = "SELECT * FROM " . $table_name . " WHERE id_usr = '" . $where . "'";
+        $result = mysqli_query($this->con, $query);
+        
+        return $result;
     }
 
 /* FUNCTION FOR SESSION LOG IN AND LOG OUT*/ 
