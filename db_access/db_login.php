@@ -63,49 +63,31 @@
       $channelSong = trim($channelSong,'"');
       $durationSong = trim($durationSong,'"');
 
-      $field = array(
+      $data_check = array(
           'id_song' => $songId,
-          'title_song' => $titleSong,
-          'channel_song' => $channelSong,
-          'duration_song' => $durationSong,
-          'id_usr' => $_SESSION['id_usr'],
-          'date_save' => date("Y-m-d H:i:s")
+          'id_usr' => $_SESSION['id_usr']
       );
-      if(!($data->select_data("tb_playlist_user", $field))){
-          if($data->create_data("tb_playlist_user", $field)){
-              echo "berhasil bro";
-              echo "ini dia";
-              echo $_SESSION['id_usr'];
-          }else{
-              echo "you have problem with save playlist, please try again";
-          }
+
+      $field = array(
+        'id_song' => $songId,
+        'title_song' => $titleSong,
+        'channel_song' => $channelSong,
+        'duration_song' => $durationSong,
+        'id_usr' => $_SESSION['id_usr'],
+        'date_save' => date("Y-m-d H:i:s")
+      );
+
+      if($data->select_data("tb_playlist_user", $data_check)){
+            echo "can't add, this playlist already save in your playlist";
       }else{
-          echo "can't add, this playlist already save in your playlist";
+            if($data->create_data("tb_playlist_user", $field)){
+                echo "berhasil bro";
+                echo "ini dia";
+                echo $_SESSION['id_usr'];
+            }else{
+                echo "you have problem with save playlist, please try again";
+            }
       }
   }
 
-  //if($page=='add'){
-
-    //try{
-        /*$field = array(
-          'id_song' => $_POST['songId'],
-          'id_user' => 1,
-          'date' => '2018-12-04'
-        );
-        $data->register_user("tb_playlist_user", $field);
-        /*$stmt = $dbh->prepare("INSERT INTO crud VALUES(?,?,?,?,?)");
-        $stmt->bindParam(1,$id);
-        $stmt->bindParam(2,$nm);
-        $stmt->bindParam(3,$em);
-        $stmt->bindParam(4,$hp);
-        $stmt->bindParam(5,$ad);
-        if($stmt->execute()){
-            print "<div class='alert alert-success' role='alert'>Data has been added</div>";
-        } else{
-            print "<div class='alert alert-danger' role='alert'>Failed to add data</div>";
-    }*/ 
-    //} catch(PDOException $e){
-        //print "Error!: " . $e->getMessage() . "<br/>";
-    //} 
-  //}
 ?>

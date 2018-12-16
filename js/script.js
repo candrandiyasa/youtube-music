@@ -368,7 +368,8 @@ function saveVideo(element) {
                 durationSong : JSON.stringify(durationSong) 
               },
         success:function(res){
-            alert('Data berhasil tersimpan');
+            //alert('playlist already saved');
+            $('#playlist-item').load(document.URL +  ' #playlist-item');
             console.log(res);
         }
     });
