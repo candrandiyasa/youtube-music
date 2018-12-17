@@ -52,7 +52,7 @@
     <div class="nav-wrapper">
       <ul>
         <li>Hei,
-          <a href="#">
+          <a href="#" id="session_trust">
             <?php
               echo $_SESSION["username"];
             ?>

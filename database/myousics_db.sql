@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 16 Des 2018 pada 02.55
+-- Generation Time: 17 Des 2018 pada 08.22
 -- Versi Server: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -36,13 +36,6 @@ CREATE TABLE `tb_playlist_user` (
   `date_save` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `tb_playlist_user`
---
-
-INSERT INTO `tb_playlist_user` (`id`, `id_song`, `title_song`, `channel_song`, `duration_song`, `id_usr`, `date_save`) VALUES
-(13, 'm7Bc3pLyij0', 'Marshmello ft. Bastille - Happier (Official Music Video)', 'Marshmello', '3:54', 1, '2018-12-16 02:35:37');
-
 -- --------------------------------------------------------
 
 --
@@ -62,12 +55,8 @@ CREATE TABLE `tb_user_access` (
 
 INSERT INTO `tb_user_access` (`id_usr`, `username_usr`, `pass_usr`, `email_usr`) VALUES
 (1, 'candrandiyasa', '4c5bde74a8f110656874902f07378009', 'candrandiyasa@gmail.com'),
-(7, 'made', 'cfecdb276f634854f3ef915e2e980c31', 'made@gmail.com'),
-(8, 'made', 'cfecdb276f634854f3ef915e2e980c31', 'made@gmail.com'),
-(9, 'madecandrandiyasa', '849dc336235d5cbd4a581a3a94106216', 'madecandra@gmail.com'),
-(10, 'madecandrandiyasa', '849dc336235d5cbd4a581a3a94106216', 'madecandra@gmail.com'),
-(11, 'made', 'cfecdb276f634854f3ef915e2e980c31', 'made@gmail.com'),
-(12, 'kadek', 'cfecdb276f634854f3ef915e2e980c31', 'kadek@gmail.com');
+(7, 'ditto', '202cb962ac59075b964b07152d234b70', 'ditto@gmail.com'),
+(8, 'ridwan', '202cb962ac59075b964b07152d234b70', 'ridwan@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -94,7 +83,7 @@ ALTER TABLE `tb_user_access`
 -- AUTO_INCREMENT for table `tb_playlist_user`
 --
 ALTER TABLE `tb_playlist_user`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `tb_user_access`
 --

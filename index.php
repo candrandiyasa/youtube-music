@@ -197,9 +197,9 @@
     <div class="row justify-content-center">
       <div class="col-lg-3">
         <div class="player-content-left">
-          <a class="random">
+          <!--<a class="random">
             <i class="fa fa-random"></i>
-          </a>
+          </a>-->
           <a href="#" class="prev" onclick="prevSong();return false;" id="prevBtn">
             <i class="fa fa-step-backward"></i>
           </a>

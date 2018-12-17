@@ -353,27 +353,32 @@ function playSong(element) {
 }
 
 function saveVideo(element) {
-    var songId = $(element).data('id');
-    var titleSong = $(element).data('title');
-    var channelSong = $(element).data('channel');
-    var durationSong = $(element).data('dur');
+    if(document.getElementById('session_trust') !== null){
+        var songId = $(element).data('id');
+        var titleSong = $(element).data('title');
+        var channelSong = $(element).data('channel');
+        var durationSong = $(element).data('dur');
 
-    //console.log(songId);
-    $.ajax({
-        url: "../db_access/db_login.php",
-        method: "POST",
-        data: { songId : JSON.stringify(songId), 
-                titleSong : JSON.stringify(titleSong), 
-                channelSong : JSON.stringify(channelSong), 
-                durationSong : JSON.stringify(durationSong) 
-              },
-        success:function(data){
-            $('.playlist-item').load(' .playlist-item');
-            
-            alert('playlist already saved');
-            //console.log(res);
-        }
-    });
+        //console.log(songId);
+        $.ajax({
+            url: "../db_access/db_login.php",
+            method: "POST",
+            data: { songId : JSON.stringify(songId), 
+                    titleSong : JSON.stringify(titleSong), 
+                    channelSong : JSON.stringify(channelSong), 
+                    durationSong : JSON.stringify(durationSong) 
+                },
+            success:function(data){
+                $('.playlist-item').load(' .playlist-item');
+                
+                alert('playlist already saved');
+                //console.log(res);
+            }
+        });
+    }else{
+        document.getElementById('md-account-login').style.display='block';
+    }
+    
 }
 
 function viewData(){
