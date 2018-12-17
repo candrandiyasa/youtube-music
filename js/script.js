@@ -367,10 +367,11 @@ function saveVideo(element) {
                 channelSong : JSON.stringify(channelSong), 
                 durationSong : JSON.stringify(durationSong) 
               },
-        success:function(res){
-            //alert('playlist already saved');
-            $('#playlist-item').load(document.URL +  ' #playlist-item');
-            console.log(res);
+        success:function(data){
+            $('.playlist-item').load(' .playlist-item');
+            
+            alert('playlist already saved');
+            //console.log(res);
         }
     });
 }
