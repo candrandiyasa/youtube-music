@@ -5,7 +5,6 @@
     $data->redirect('../index.php');
   }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,7 +52,7 @@
     <div class="nav-wrapper">
       <ul>
         <li>Hei,
-          <a href="#">
+          <a href="#" id="session_trust">
             <?php
               echo $_SESSION["username"];
             ?>
@@ -143,14 +142,46 @@
             <label>Your Playlist</label>
               <div class="playlist-menu-sett">
                 <!--button deployed here-->
+                <a href="#" title="Fixed Position Playlist Menu" id="fixedPlaylist"><i style="font-size:24px" class="fa">&#xf08d;</i></a>
                 <a href="#" title="Save Queue"><i style="font-size:24px" class="fa">&#xf01c;</i></a>
                 <a href="#" onclick="playAllOnList();return false" title="Play All Playlist"><i style="font-size:24px" class="fa">&#xf04b;</i></a>
                 <a href="#" onclick="clearPlaylist();return false" title="Delete Playlist"><i style="font-size:24px" class="fa">&#xf014;</i></a>
               </div>
           </div>
         </div>
+<<<<<<< HEAD
         <div class="playlist-item" id="playlist-item">
           <!--playlist item here -->          
+=======
+        <div class="playlist-item">
+          
+          <?php 
+          $get_playlist_data = $data->select_query("tb_playlist_user", $_SESSION['id_usr']);
+          
+          if(mysqli_num_rows($get_playlist_data) > 0){
+            while($show_data = mysqli_fetch_array($get_playlist_data)){
+            $id_playlist_data = $show_data['id_song'];
+          ?>
+              <div class="row">
+                <div class="col-8">
+                  <span>
+                    <b><?php echo $show_data['title_song']; ?></b><br>
+                    <small>by <?php echo $show_data['channel_song']; ?></small>
+                  </span>
+                </div>
+                <div class="col-3">
+                  <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
+                  <i class="context-menu" data-container-id="context-menu-items" data-row-id="1"></i>
+                </div>  
+              </div>
+          <?php 
+            }
+          }else{
+            echo "0 result";
+          }
+          ?>
+          <!-- next playlist item here -->          
+>>>>>>> dfa536e872445c1c60e14eaa8c182b7527640008
         </div>
     </div>
 
@@ -158,9 +189,9 @@
     <div class="row justify-content-center">
       <div class="col-lg-3">
         <div class="player-content-left">
-          <a class="random">
+          <!--<a class="random">
             <i class="fa fa-random"></i>
-          </a>
+          </a>-->
           <a href="#" class="prev" onclick="prevSong();return false;" id="prevBtn">
             <i class="fa fa-step-backward"></i>
           </a>

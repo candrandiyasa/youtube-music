@@ -1,10 +1,10 @@
 /* js for show line bottom in navbar if client scroling bar */
 $(window).on('scroll', function(){
-  if($(window).scrollTop() > 100){
-    $('nav').addClass('lineBottom');
-  }else{
-    $('nav').removeClass('lineBottom');
-  }
+    if($(window).scrollTop() > 100){
+        $('nav').addClass('lineBottom');
+    }else{
+        $('nav').removeClass('lineBottom');
+    }
 });
 
 
@@ -14,22 +14,29 @@ $('#playlist-menu').click(function(e){
     var userSession = 'active';
 
     if (userSession == 'active'){
-      e.stopPropagation();
-      $('#playlist-container').toggleClass('playlist-container-show');
-      document.body.style.overflow = 'hidden';
+        e.stopPropagation();
+        $('#playlist-container').toggleClass('playlist-container-show');
+        document.body.style.overflow = 'hidden';
     }else{
-      document.getElementById('md-account-login').style.display='block';
+        document.getElementById('md-account-login').style.display='block';
     }
 });
 
 $('body,html').click(function(e){
     var container = $("#playlist-container");
-    if (!container.is(e.target) && container.has(e.target).length === 0) {
-      container.removeClass('playlist-container-show');
-      document.body.style.overflow = 'auto';
+
+    if (!container.is(e.target) && container.has(e.target).length === 0 && !($('#fixedPlaylist').hasClass('pinPlaylistActive'))) {
+        container.removeClass('playlist-container-show');
+        document.body.style.overflow = 'auto';
     }
 });
 //--------------end
+
+
+$('#fixedPlaylist').click(function(e){
+    $(this).toggleClass('pinPlaylistActive');
+});
+
 
 
 function loginOpen(){
