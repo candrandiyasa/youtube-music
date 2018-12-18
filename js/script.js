@@ -237,7 +237,7 @@ function getOutput(item,details){
                             '</p>'+
                             '<b class="md-back">'+
                               '<a href="#" title="Play this video music" data-state="other" data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playSong(this);return false;"><i class="fa">&#xf01d;</i> Play</a>'+
-                              '<a href="#" title="Set this music to my playlist" data-dur="'+duration+'" data-id="'+vidId+'" data-title="'+title+'" data-channel="'+channel+'" data-seek="'+seekTimePl+'" onclick="saveVideo(this); return false;"><i class="fa">&#xf196;</i> Add To Playlist</a>'+
+                              '<a href="#" title="Set this music to my playlist" data-dur="'+duration+'" data-id="'+vidId+'" data-title="'+title+'" data-channel="'+channel+'" data-seek="'+seekTimePl+'" onclick="addList(this); return false;"><i class="fa">&#xf196;</i> Add To Playlist</a>'+
                             '</b>'+
                           '</div>'+
                         '</div>'+
@@ -482,7 +482,7 @@ function buttonPlayPress(state) {
     console.log(state);
 }
 
-//PLAYLIST ONLY
+//PLAYLIST
 function addList(element){
     var songId = $(element).data('id');
     var songTitle = $(element).data('title');
