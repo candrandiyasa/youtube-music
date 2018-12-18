@@ -13,7 +13,7 @@
     if($data->required_validation($field)){
       if($data->can_login("tb_user_access", $field)){
         $_SESSION["username"] = $_POST["username"];
-        header("location:user_page/index.php");
+        header("location:../user_page/index.php");
       }else{
         $message = $data->error;
       }

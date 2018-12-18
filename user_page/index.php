@@ -144,25 +144,13 @@
               <div class="playlist-menu-sett">
                 <!--button deployed here-->
                 <a href="#" title="Save Queue"><i style="font-size:24px" class="fa">&#xf01c;</i></a>
-                <a href="#" title="Play All Playlist"><i style="font-size:24px" class="fa">&#xf04b;</i></a>
-                <a href="#" title="Delete Playlist"><i style="font-size:24px" class="fa">&#xf014;</i></a>
+                <a href="#" onclick="playAllOnList();return false" title="Play All Playlist"><i style="font-size:24px" class="fa">&#xf04b;</i></a>
+                <a href="#" onclick="clearPlaylist();return false" title="Delete Playlist"><i style="font-size:24px" class="fa">&#xf014;</i></a>
               </div>
           </div>
         </div>
-        <div class="playlist-item">
-          <div class="row">
-            <div class="col-8">
-              <span>
-                <b>Bring Me The Horizon - Mantra Bring Me The Horizon - Mantra</b><br>
-                <small>by BringMeTheHorizonVevo</small>
-              </span>
-            </div>
-            <div class="col-3">
-              <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-              <i class="context-menu" data-container-id="context-menu-items" data-row-id="1"></i>
-            </div>
-          </div>
-          <!-- next playlist item here -->          
+        <div class="playlist-item" id="playlist-item">
+          <!--playlist item here -->          
         </div>
     </div>
 
@@ -211,7 +199,7 @@
       <div class="col-lg-2">
         <div class="player-content-left" style="padding-left: 0px; display: flex;">
           <i class="fa fa-volume-up" style="margin-top: 10px;" id="mute-toggle"></i>
-          <input type="range" min="0" max="100" class="slider" id="volume-input" style="width: 70px; margin: 18px 0px 0px 8px;">
+          <input type="range" min="0" max="100" class="slider" value="100" id="volume-input" style="width: 70px; margin: 18px 0px 0px 8px;">
           <a class="playlist-menu" id="playlist-menu">
             <i class="fa fa-th-list"></i>
           </a>
