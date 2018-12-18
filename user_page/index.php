@@ -149,10 +149,8 @@
               </div>
           </div>
         </div>
-<<<<<<< HEAD
         <div class="playlist-item" id="playlist-item">
           <!--playlist item here -->          
-=======
         <div class="playlist-item">
           
           <?php 
@@ -181,10 +179,9 @@
           }
           ?>
           <!-- next playlist item here -->          
->>>>>>> dfa536e872445c1c60e14eaa8c182b7527640008
         </div>
     </div>
-
+</div>
  <div class="player-navbar">
     <div class="row justify-content-center">
       <div class="col-lg-3">
