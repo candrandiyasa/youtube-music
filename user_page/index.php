@@ -155,8 +155,6 @@
               </div>
           </div>
         </div>
-        <div class="playlist-item" id="playlist-item">
-          <!--playlist item here -->          
         <div class="playlist-item">
 
           <?php 
@@ -187,7 +185,7 @@
           <!-- next playlist item here -->          
         </div>
     </div>
-</div>
+
  <div class="player-navbar">
     <div class="row justify-content-center">
       <div class="col-lg-3">
@@ -233,7 +231,7 @@
       <div class="col-lg-2">
         <div class="player-content-left" style="padding-left: 0px; display: flex;">
           <i class="fa fa-volume-up" style="margin-top: 10px;" id="mute-toggle"></i>
-          <input type="range" min="0" max="100" class="slider" value="100" id="volume-input" style="width: 70px; margin: 18px 0px 0px 8px;">
+          <input type="range" min="0" max="100" class="slider" id="volume-input" style="width: 70px; margin: 18px 0px 0px 8px;">
           <a class="playlist-menu" id="playlist-menu">
             <i class="fa fa-th-list"></i>
           </a>
