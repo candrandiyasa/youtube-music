@@ -27,12 +27,8 @@
   <!-- context item for playlist item and it's hide, showing after click 3dot -->
   <div class="context-menu-container" id="context-menu-items">
     <ul>
-      <li>Detail </li>
-      <li>Item 2</li>
-      <li>Item 3</li>
-      <li>Re-enable item 2</li>
-      <li class="warning">Warning Item</li>
       <li class="danger">Delete Item</li>
+      <li>Details</li>
     </ul>
   </div>
 
@@ -143,16 +139,32 @@
               <div class="playlist-menu-sett">
                 <!--button deployed here-->
                 <a href="#" title="Fixed Position Playlist Menu" id="fixedPlaylist"><i style="font-size:24px" class="fa">&#xf08d;</i></a>
+<<<<<<< HEAD
+                
+                <!--<a href="#" title="Save Queue" onclick="getDataJSON(); "><i style="font-size:24px" class="fa">&#xf01c;</i></a> -->
+                <?php 
+                    $get_firstPlaylist_data = $data->select_query("tb_playlist_user", $_SESSION['id_usr']);
+                    if(mysqli_num_rows($get_firstPlaylist_data) > 0){
+                        $playFirstIndex = mysqli_fetch_array($get_firstPlaylist_data);
+                        echo '<a href="#" title="Play All Playlist" data-state="playlist" data-dur="'.$playFirstIndex["duration_song"].'" data-title="'.$playFirstIndex["title_song"].'" data-id="'.$playFirstIndex["id_song"].'" onclick="playSong(this); return false;"><i style="font-size:24px" class="fa">&#xf04b;</i></a>';
+                        echo '<a href="#" title="Delete All Data Playlist" onclick="deletePlaylist()"><i style="font-size:24px" class="fa">&#xf014;</i></a>';  
+                    }else{
+                        echo '<a href="#" title="Play All Playlist"><i style="font-size:24px" class="fa">&#xf04b;</i></a>';
+                        echo '<a href="#" title="Delete Playlist"><i style="font-size:24px" class="fa">&#xf014;</i></a>';  
+                    }
+                ?>
+=======
                 <a href="#" title="Save Queue"><i style="font-size:24px" class="fa">&#xf01c;</i></a>
                 <a href="#" onclick="playAllOnList();return false" title="Play All Playlist"><i style="font-size:24px" class="fa">&#xf04b;</i></a>
                 <a href="#" onclick="clearPlaylist();return false" title="Delete Playlist"><i style="font-size:24px" class="fa">&#xf014;</i></a>
+>>>>>>> db6bb49a40e52b974702fd5a5ecb4e7c8e5235d3
               </div>
           </div>
         </div>
         <div class="playlist-item" id="playlist-item">
           <!--playlist item here -->          
         <div class="playlist-item">
-          
+
           <?php 
           $get_playlist_data = $data->select_query("tb_playlist_user", $_SESSION['id_usr']);
           
@@ -168,8 +180,8 @@
                   </span>
                 </div>
                 <div class="col-3">
-                  <a href="#" class="fa" align="left" title="Play Music Playlist">&#xf04b;</a>
-                  <i class="context-menu" data-container-id="context-menu-items" data-row-id="1"></i>
+                  <a href="#" class="fa" align="left" title="Play Music Playlist" data-state="playlist" data-dur="<?php echo $show_data['duration_song']; ?>" data-title="<?php echo $show_data['title_song']; ?>" data-id="<?php echo $show_data['id_song']; ?>" onclick="playSong(this);return false;">&#xf04b;</a>
+                  <i class="context-menu" data-container-id="context-menu-items" data-row-id="1" data-id="<?php echo $show_data['id']; ?>" data-id-song="<?php echo $show_data['id_song']; ?>"></i>
                 </div>  
               </div>
           <?php 
@@ -242,6 +254,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/1.3.0/moment-duration-format.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
 <script src="../js/main.js"></script>
-<script src="../js/context-menu.js"></script>
+<script src="../js/context-menu.js"></script> 
+
 </body>
 </html>

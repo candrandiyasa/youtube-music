@@ -5,13 +5,17 @@ $(function(){
     });
 })
 
+//get database data for playlist user if they have data
+getDataJSON();
+
 //youtube API Key
 var apiKey = 'AIzaSyBM7U5jft6XHLqfNfo1ZN3ZKg744gx_76w';
 
 //required vars and arrays
-var index=1, i=0, state = 'other';
+var index = 1, i = 0, state = 'other';
 var list = [], listTitle = [], listDur = [], seek = []; //for reg playlist
 var listPl = [], listPlTitle = [], listPlDur = [], seekPl = []; //for custom playlist
+
 //calling iframe API asynchronously
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
@@ -22,6 +26,12 @@ function clearArrays(){
     listTitle = [];
     listDur = [];
     seek = [];
+}
+function clearCustomArrays(){
+    listPl = [];
+    listPlTitle = [];
+    listPlDur = [];
+    seekPl = [];
 }
 //search engine
 function search(){
@@ -131,7 +141,7 @@ function nextPage(){
                                 var timeConv = moment.duration(time);
                                 var dur = timeConv.format('m:s', {trim: false});
                                 var seekTime = timeConv.format('s', {trim: false});
-                                seek.push(seekTime)
+                                seek.push(seekTime);
                                 list.push(listIds);
                                 listTitle.push(listTitles);
                                 listDur.push(dur);
@@ -237,8 +247,13 @@ function getOutput(item,details){
                             '</p>'+
                             '<b class="md-back">'+
                               '<a href="#" title="Play this video music" data-state="other" data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playSong(this);return false;"><i class="fa">&#xf01d;</i> Play</a>'+
+<<<<<<< HEAD
+                              '<a href="#" title="Set this music to my playlist" data-dur="'+duration+'" data-id="'+vidId+'" data-title="'+title+'" data-channel="'+channel+'" data-seek="'+seekTimePl+'" onclick="saveVideo(this); return false;"><i class="fa">&#xf196;</i> Add To Playlist</a>'+                        
+                              '</b>'+
+=======
                               '<a href="#" title="Set this music to my playlist" data-dur="'+duration+'" data-id="'+vidId+'" data-title="'+title+'" data-channel="'+channel+'" data-seek="'+seekTimePl+'" onclick="addList(this); return false;"><i class="fa">&#xf196;</i> Add To Playlist</a>'+
                             '</b>'+
+>>>>>>> db6bb49a40e52b974702fd5a5ecb4e7c8e5235d3
                           '</div>'+
                         '</div>'+
                         '<div class="phone-list">'+
@@ -358,6 +373,7 @@ function saveVideo(element) {
         var titleSong = $(element).data('title');
         var channelSong = $(element).data('channel');
         var durationSong = $(element).data('dur');
+        var seekSong = $(element).data('seek');
 
         //console.log(songId);
         $.ajax({
@@ -366,7 +382,8 @@ function saveVideo(element) {
             data: { songId : JSON.stringify(songId), 
                     titleSong : JSON.stringify(titleSong), 
                     channelSong : JSON.stringify(channelSong), 
-                    durationSong : JSON.stringify(durationSong) 
+                    durationSong : JSON.stringify(durationSong),
+                    seekSong : JSON.stringify(seekSong)
                 },
             success:function(data){
                 $('.playlist-item').load(' .playlist-item');
@@ -375,11 +392,28 @@ function saveVideo(element) {
                 //console.log(res);
             }
         });
+        getDataJSON();
     }else{
         document.getElementById('md-account-login').style.display='block';
     }
     
 }
+
+function deletePlaylist(){
+    $.ajax({
+        url: "../db_access/db_login.php",
+        method: "POST",
+        data: { deleteAll : "tb_playlist_user" },
+        success:function(data){
+            $('.playlist-item').load(' .playlist-item');
+            
+            alert('All of your playlists were deleted');
+
+            clearCustomArrays();
+        }
+    });
+}
+
 
 function viewData(){
     $.get('../user_page/index.php', function(data){
@@ -482,6 +516,12 @@ function buttonPlayPress(state) {
     console.log(state);
 }
 
+<<<<<<< HEAD
+//get data selected query in php and encode to json, get data in this function for array
+function getDataJSON(){
+    var xmlhttp = new XMLHttpRequest();
+    var url = "getdata_json.php";
+=======
 //PLAYLIST
 function addList(element){
     var songId = $(element).data('id');
@@ -508,47 +548,72 @@ function addList(element){
     seekPl.push(seekTimeP);
     console.log(listPl);
     console.log(seekPl);
+>>>>>>> db6bb49a40e52b974702fd5a5ecb4e7c8e5235d3
 
-}
-function playAllOnList(){
-    $('#song-title').html('');
-    var songId = listPl[0];
-    var songTitle = listPlTitle[0];
-    var duration = listPlDur[0];
-    state = 'playlist';
-    i = listPl.indexOf(songId);
-    console.log(songId);
-    console.log('state:',state);
-    player.loadVideoById(songId, "small");
-    var titleText = '<small class="current">'+songTitle+'</small>';
-    $('#song-title').append(titleText);
-    var durationTag = document.getElementById("duration");
-    durationTag.innerHTML = duration;
-
-    document.title = 'MYousics- '+songTitle;
-
-    lost = 'stop';
-    console.log(lost);
-    buttonPlayPress(lost);
-}
-function clearPlaylist(){
-    $('#playlist-item').html('');
-    listPl = [], listPlTitle = [], listPlDur = [], seekPl = [];
-}
-function savePlaylist() {
-    var songId = $(element).data('id');
-    //console.log(songTitle);
-    //$.post("../db_access/db_login.php", { songId : songId });
-    $.ajax({
-        type: "POST",
-        //url: "../db_access/db_login.php",
-        url: "../db_access/db_test.php",
-        data: {songIdY : songId},
-        datatype: "json",
-        success:function(data){
-            alert('Success');
+    xmlhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            var myArr = JSON.parse(this.responseText);
+            //console.log(myArr);
+            myFunction(myArr);
         }
-    });
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
 
-    //console.log(songId);
+    function myFunction(arr){
+        var i;
+        clearCustomArrays();
+
+        for(i = 0; i < arr.length; i++){
+            listPl.push(arr[i].id_song);
+            listPlTitle.push(arr[i].title_song);
+            listPlDur.push(arr[i].duration_song); 
+            seekPl.push(arr[i].seek_song);
+        }
+        /* check index in array
+            length = listPl.length;
+            for (i = 0; i < length; i += 1) {
+                if (Object.prototype.hasOwnProperty.call(listPl, i)) {
+                    console.log(i, listPl[i]);
+                }
+            }
+        */
+    }
 }
+
+
+ //CONTEXT MENU FOR PLAYLIST
+ var tableContextMenu = null;
+
+ $(document).ready(function(){
+     tableContextMenu = new ContextMenu("context-menu-items", menuItemClickListener);
+     //tableContextMenu.disableMenuItem(1); propety for disable menu in index 1
+ });
+
+ function menuItemClickListener(menu_item, parent)
+ {
+     if(menu_item.text() == "Delete Item"){
+         var result = confirm("Want to delete this item ?");
+         
+         if (result) {
+             $.ajax({
+                 url: "../db_access/db_login.php",
+                 method: "POST",
+                 data: { 
+                     deleteItem : "tb_playlist_user",
+                     dataId : parent.attr("data-id")
+                     //songId : parent.attr("data-id-song")
+                 },
+                 success:function(data){
+                     $('.playlist-item').load(' .playlist-item');
+                     
+                     alert('this item success to deleted');
+                     
+                     getDataJSON();
+                 }
+             });
+         }
+     }else if(menu_item.text() == "Details"){
+         alert("Menu Item Clicked: " + menu_item.text() + "\nRecord ID: " + parent.attr("data-id-song"));
+     }
+ }

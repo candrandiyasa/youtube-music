@@ -71,31 +71,3 @@ $('#mute-toggle').on('click', function() {
 $('#volume-input').on('change', function () {
   player.setVolume($(this).val());
 });
-
-
-          //context menu playlist
-            var tableContextMenu = null;
-
-            $(document).ready(function(){
-                var options = {
-                    openCallBack: function(contextMenu) {
-                        contextMenu.disableMenuItem("Warning Item");
-                    }
-                };
-                tableContextMenu = new ContextMenu("context-menu-items", menuItemClickListener);
-                tableContextMenu.disableMenuItem(1);
-            });
-
-            function menuItemClickListener(menu_item, parent)
-            {
-                if (menu_item.text() === "Re-enable item 2")
-                {
-                    tableContextMenu.enableMenuItem("Item 2");
-                    //As we can't enable item 2 again, then why not disable the menu item to re-enable
-                    tableContextMenu.disableMenuItem(3);
-                }
-                else
-                {
-                    alert("Menu Item Clicked: " + menu_item.text() + "\nRecord ID: " + parent.attr("data-row-id"));
-                }
-            }
