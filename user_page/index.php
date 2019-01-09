@@ -139,7 +139,6 @@
               <div class="playlist-menu-sett">
                 <!--button deployed here-->
                 <a href="#" title="Fixed Position Playlist Menu" id="fixedPlaylist"><i style="font-size:24px" class="fa">&#xf08d;</i></a>
-<<<<<<< HEAD
                 
                 <!--<a href="#" title="Save Queue" onclick="getDataJSON(); "><i style="font-size:24px" class="fa">&#xf01c;</i></a> -->
                 <?php 
@@ -153,11 +152,6 @@
                         echo '<a href="#" title="Delete Playlist"><i style="font-size:24px" class="fa">&#xf014;</i></a>';  
                     }
                 ?>
-=======
-                <a href="#" title="Save Queue"><i style="font-size:24px" class="fa">&#xf01c;</i></a>
-                <a href="#" onclick="playAllOnList();return false" title="Play All Playlist"><i style="font-size:24px" class="fa">&#xf04b;</i></a>
-                <a href="#" onclick="clearPlaylist();return false" title="Delete Playlist"><i style="font-size:24px" class="fa">&#xf014;</i></a>
->>>>>>> db6bb49a40e52b974702fd5a5ecb4e7c8e5235d3
               </div>
           </div>
         </div>
