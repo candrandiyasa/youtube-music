@@ -247,13 +247,8 @@ function getOutput(item,details){
                             '</p>'+
                             '<b class="md-back">'+
                               '<a href="#" title="Play this video music" data-state="other" data-dur="'+duration+'" data-title="'+title+'" data-id="'+vidId+'" onclick="playSong(this);return false;"><i class="fa">&#xf01d;</i> Play</a>'+
-<<<<<<< HEAD
                               '<a href="#" title="Set this music to my playlist" data-dur="'+duration+'" data-id="'+vidId+'" data-title="'+title+'" data-channel="'+channel+'" data-seek="'+seekTimePl+'" onclick="saveVideo(this); return false;"><i class="fa">&#xf196;</i> Add To Playlist</a>'+                        
                               '</b>'+
-=======
-                              '<a href="#" title="Set this music to my playlist" data-dur="'+duration+'" data-id="'+vidId+'" data-title="'+title+'" data-channel="'+channel+'" data-seek="'+seekTimePl+'" onclick="addList(this); return false;"><i class="fa">&#xf196;</i> Add To Playlist</a>'+
-                            '</b>'+
->>>>>>> db6bb49a40e52b974702fd5a5ecb4e7c8e5235d3
                           '</div>'+
                         '</div>'+
                         '<div class="phone-list">'+
@@ -516,39 +511,10 @@ function buttonPlayPress(state) {
     console.log(state);
 }
 
-<<<<<<< HEAD
 //get data selected query in php and encode to json, get data in this function for array
 function getDataJSON(){
     var xmlhttp = new XMLHttpRequest();
     var url = "getdata_json.php";
-=======
-//PLAYLIST
-function addList(element){
-    var songId = $(element).data('id');
-    var songTitle = $(element).data('title');
-    var upBy = $(element).data('channel');
-    var songDur = $(element).data('dur');
-    var seekTimeP = $(element).data('seek');
-    var listVal = '<div class="row">'+
-                    '<div class="col-8">'+
-                        '<span>'+
-                            '<b>'+songTitle+'</b><br>'+
-                            '<small>Uploaded by: '+upBy+'</small>'+
-                        '</span>'+
-                    '</div>'+
-                    '<div class="col-3">'+
-                        '<a href="#" class="fa" align="left" title="Play Music Playlist" data-state="playlist" data-dur="'+songDur+'" data-title="'+songTitle+'" data-id="'+songId+'" onclick="playSong(this);return false;">&#xf04b;</a>'+
-                        '<i class="fa">&#xf142;</i>'+
-                    '</div>'+
-                '</div>';
-    $('#playlist-item').append(listVal);
-    listPl.push(songId);
-    listPlTitle.push(songTitle);
-    listPlDur.push(songDur);
-    seekPl.push(seekTimeP);
-    console.log(listPl);
-    console.log(seekPl);
->>>>>>> db6bb49a40e52b974702fd5a5ecb4e7c8e5235d3
 
     xmlhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
