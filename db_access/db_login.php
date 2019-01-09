@@ -58,10 +58,12 @@
       $titleSong = $_REQUEST['titleSong'];
       $channelSong = $_REQUEST['channelSong'];
       $durationSong = $_REQUEST['durationSong'];
+      $seekSong = $_REQUEST['seekSong'];
       $songId = trim($songId,'"');
       $titleSong  = trim($titleSong ,'"');
       $channelSong = trim($channelSong,'"');
       $durationSong = trim($durationSong,'"');
+      $seekSong = trim($seekSong,'"');
 
       $data_check = array(
           'id_song' => $songId,
@@ -73,6 +75,7 @@
         'title_song' => $titleSong,
         'channel_song' => $channelSong,
         'duration_song' => $durationSong,
+        'seek_song' => $seekSong,
         'id_usr' => $_SESSION['id_usr'],
         'date_save' => date("Y-m-d H:i:s")
       );
@@ -90,4 +93,26 @@
       }
   }
 
+  else if(isset($_POST['deleteAll'])){
+        $field = $_POST['deleteAll'];
+        $userdata = $_SESSION['id_usr'];
+
+        if($data->deleteAll_query($field, $userdata)){
+            echo "data playlismu terhapus semua";
+        }else{
+            echo "you have problem with delete playlist, please try again";
+        }
+  }
+
+  else if(isset($_POST['deleteItem'])){
+        $field = $_POST['deleteItem'];
+        $dataId = $_POST['dataId'];
+        $userdata = $_SESSION['id_usr'];
+        
+        if($data->deleteItem_query($field, $userdata, $dataId)){
+            echo "data playlismu berhasil terhapus";
+        }else{
+            echo "you have problem with delete playlist, please try again";
+        }
+    }
 ?>

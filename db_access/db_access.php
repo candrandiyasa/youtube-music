@@ -75,8 +75,9 @@
     public function get_id_usr($table_name, $where){
         $query = "SELECT id_usr FROM " . $table_name . " WHERE username_usr = '" . $where . "'";
         $result = mysqli_query($this->con, $query);
-        if($getid = mysqli_fetch_assoc($result) > 0){
-            $feth = $getid;
+        if(mysqli_num_rows($result) > 0){
+            $getid = mysqli_fetch_assoc($result);
+            $feth = $getid['id_usr'];
             return $feth;
         }else{
             $this->error = "You have problem, cek your data";
@@ -86,6 +87,20 @@
 
     public function select_query($table_name, $where){
         $query = "SELECT * FROM " . $table_name . " WHERE id_usr = '" . $where . "'";
+        $result = mysqli_query($this->con, $query);
+        
+        return $result;
+    }
+
+    public function deleteAll_query($table_name, $user){
+        $query = "DELETE FROM " . $table_name ." WHERE id_usr ='". $user ."'";
+        $result = mysqli_query($this->con, $query);
+        
+        return $result;
+    }
+
+    public function deleteItem_query($table_name, $user, $IdSong){
+        $query = "DELETE FROM " . $table_name ." WHERE id_usr ='". $user ."' AND id = '". $IdSong ."'";
         $result = mysqli_query($this->con, $query);
         
         return $result;
